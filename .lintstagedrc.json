@@ -1,3 +1,4 @@
 {
-  "*.{ts,tsx}": ["eslint", "prettier -w"]
+  "*.{js,ts,jsx,tsx}": ["eslint", "prettier -w"],
+  "*.{html,css,scss,json}": ["prettier -w"]
 }
