@@ -1,17 +1,15 @@
+// ********************************************************************************
+// ホーム画面
+// ********************************************************************************
+
 import { NextPage } from "next";
-import Head from "next/head";
-import appConfig from "~/config/app";
+import { MainLayout } from "~/components/templates/main";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>{appConfig.title}</title>
-      </Head>
-      <main className="container mx-auto text-center">
-        <h1 className="text-4xl">Hack U</h1>
-      </main>
-    </div>
+    <MainLayout>
+      <h1 className="text-4xl">ホーム画面</h1>
+    </MainLayout>
   );
 };
 
