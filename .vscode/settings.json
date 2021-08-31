@@ -4,7 +4,6 @@
     "node_modules": true,
     "README.md": true,
     "yarn.lock": true,
-    ".eslintrc.json": true,
     ".prettierignore": true,
     "next-env.d.ts": true
   }
