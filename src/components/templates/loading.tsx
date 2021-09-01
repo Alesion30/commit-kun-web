@@ -2,10 +2,12 @@
 // ローディング レイアウト
 // ********************************************************************************
 
-import { VFC } from "react";
+import { VFC, ReactNode } from "react";
 import Image from "next/image";
 import loadingGifImage from "~/assets/img/loading.gif";
+import LoadingOverlay from "react-loading-overlay-ts";
 
+/** Template: フルスクリーンのローディングレイアウト */
 export const FullScreenLoadingLayout: VFC = () => {
   return (
     <div className="fixed inset-0 bg-white opacity-70 z-50">
@@ -18,9 +20,31 @@ export const FullScreenLoadingLayout: VFC = () => {
             height={50}
             alt="loading"
           />
-          <p className="text-xl">loading...</p>
+          <p className="text-xl">ロード中</p>
         </div>
       </div>
     </div>
+  );
+};
+
+type LoadingOverlayLayout = {
+  children: ReactNode;
+  isLoading: boolean;
+};
+
+/** Template: オーバーレイタイプのローディングレイアウト */
+export const LoadingOverlayLayout: VFC<LoadingOverlayLayout> = ({
+  children,
+  isLoading,
+}) => {
+  return (
+    <LoadingOverlay
+      className="h-screen"
+      active={isLoading}
+      spinner
+      text="ロード中"
+    >
+      {children}
+    </LoadingOverlay>
   );
 };
