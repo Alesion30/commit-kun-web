@@ -5,7 +5,7 @@ import { Avatar } from "~/components/atoms/avatar";
 
 export type ProfileDropdownNavigation = {
   name: string;
-  href?: string;
+  href: string;
   onClick?: () => void;
 };
 
