@@ -15,6 +15,7 @@ type Navigation = {
 
 type TailwindUIHeaderProps = {
   onClickSignOut: () => void;
+  myImageURL: string;
 };
 
 /**
@@ -24,6 +25,7 @@ type TailwindUIHeaderProps = {
  */
 export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
   onClickSignOut,
+  myImageURL,
 }) => {
   // メイン ナビゲーション
   const navigations: Navigation[] = [
@@ -92,7 +94,10 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                <ProfileDropdownAvatar navigations={profileNavigations} />
+                <ProfileDropdownAvatar
+                  imageURL={myImageURL}
+                  navigations={profileNavigations}
+                />
               </div>
             </div>
           </div>
