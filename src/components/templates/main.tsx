@@ -25,7 +25,7 @@ export const MainLayout: VFC<MainLayoutProps> = ({ children }) => {
         myImageURL={authUser.photoURL}
         onClickSignOut={onClickSignOut}
       />
-      <main className="container mx-auto text-center">{children}</main>
+      <main className="container mx-auto">{children}</main>
     </div>
   );
 };
