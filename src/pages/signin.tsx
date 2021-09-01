@@ -4,9 +4,10 @@
 
 import { NextPage } from "next";
 import { SigninLayout } from "~/components/templates/signin";
+import { withoutAuth } from "~/hocs";
 
 const Signin: NextPage = () => {
   return <SigninLayout />;
 };
 
-export default Signin;
+export default withoutAuth(Signin);

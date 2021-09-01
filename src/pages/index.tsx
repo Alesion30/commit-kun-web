@@ -4,6 +4,7 @@
 
 import { NextPage } from "next";
 import { MainLayout } from "~/components/templates/main";
+import { withAuth } from "~/hocs";
 
 const Home: NextPage = () => {
   return (
@@ -13,4 +14,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);
