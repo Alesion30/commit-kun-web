@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 export const config = {
@@ -10,8 +10,9 @@ export const config = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
-const firebaseApp = firebase.initializeApp(config);
+const firebaseApp = initializeApp(config);
 
 export { onAuthStateChanged } from "firebase/auth";
+export type { User as FirebaseUser } from "firebase/auth";
 export const firebaseAuth = getAuth(firebaseApp);
 export default firebaseApp;
