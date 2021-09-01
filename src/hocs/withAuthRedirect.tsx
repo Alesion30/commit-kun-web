@@ -1,15 +1,8 @@
 import { useRouter } from "next/router";
 import { NextPage } from "next";
-import { VFC } from "react";
 import { useAuth } from "~/hooks";
-
-const isBrowser = (): boolean => {
-  return typeof window !== "undefined";
-};
-
-const DefaultLoadingFallback: VFC = () => {
-  return <p>Loading...</p>;
-};
+import { FullScreenLoadingLayout } from "~/components/templates/loading";
+import { isBrowser } from "~/utils";
 
 /**
  * Support client-side conditional redirecting based on the user's
@@ -25,25 +18,28 @@ const DefaultLoadingFallback: VFC = () => {
  */
 export default function withAuthRedirect<CP = {}, IP = CP>({
   WrappedComponent,
-  LoadingComponent = DefaultLoadingFallback,
   expectedAuth,
   location,
 }: {
   WrappedComponent: NextPage<CP, IP>;
-  LoadingComponent?: NextPage;
   expectedAuth: boolean;
   location: string;
 }): NextPage<CP, IP> {
   const WithAuthRedirectWrapper: NextPage<CP, IP> = (props) => {
     const router = useRouter();
     const { isLoading, isAuthenticated } = useAuth();
+
+    // ロード中
     if (isLoading) {
-      return <LoadingComponent />;
+      return <FullScreenLoadingLayout />;
     }
+
+    // リダイレクト
     if (isBrowser() && expectedAuth !== isAuthenticated) {
       router.push(location);
       return <></>;
     }
+
     return <WrappedComponent {...props} />;
   };
 
