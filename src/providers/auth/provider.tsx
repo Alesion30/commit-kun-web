@@ -1,9 +1,5 @@
 import { ReactNode, VFC, useEffect, useState } from "react";
-import {
-  firebaseAuth,
-  FirebaseUser,
-  onAuthStateChanged,
-} from "~/plugins/firebase";
+import { User, onAuthStateChanged } from "~/plugins/firebase";
 import { AuthContext } from "./context";
 
 type AuthProviderProps = {
@@ -13,14 +9,14 @@ type AuthProviderProps = {
 export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [authUser, setAuthUser] = useState<FirebaseUser>(null);
+  const [authUser, setAuthUser] = useState<User>(null);
 
   useEffect(() => {
     const initializeAuth = async (): Promise<void> => {
       // ロードを開始
       setLoading(true);
 
-      onAuthStateChanged(firebaseAuth, (user) => {
+      onAuthStateChanged((user) => {
         // 認証情報をセット
         setAuthUser(user);
 
@@ -44,7 +40,6 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
         isAuthenticated,
         authUser,
         isLoading,
-        setAuthenticated,
       }}
     >
       {children}

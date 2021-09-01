@@ -13,27 +13,33 @@ type Navigation = {
   current: boolean;
 };
 
-// メイン ナビゲーション
-const navigations: Navigation[] = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
-
-// プロフィール ドロップダウン
-const profileNavigations: ProfileDropdownNavigation[] = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+type TailwindUIHeaderProps = {
+  onClickSignOut: () => void;
+};
 
 /**
  * Organism: TailwindUIのヘッダー
  *
  * https://tailwindui.com/components/application-ui/navigation/navbars
  */
-export const TailwindUIHeader: VFC = () => {
+export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
+  onClickSignOut,
+}) => {
+  // メイン ナビゲーション
+  const navigations: Navigation[] = [
+    { name: "Dashboard", href: "#", current: true },
+    { name: "Team", href: "#", current: false },
+    { name: "Projects", href: "#", current: false },
+    { name: "Calendar", href: "#", current: false },
+  ];
+
+  // プロフィール ドロップダウン
+  const profileNavigations: ProfileDropdownNavigation[] = [
+    { name: "Your Profile", href: "#" },
+    { name: "Settings", href: "#" },
+    { name: "Sign out", onClick: onClickSignOut },
+  ];
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

@@ -1,16 +1,14 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { FirebaseUser } from "~/plugins/firebase";
+import { User } from "~/plugins/firebase";
 
 export type AuthContextProps = {
   isAuthenticated: boolean;
-  authUser: FirebaseUser;
+  authUser: User;
   isLoading: boolean;
-  setAuthenticated: Dispatch<SetStateAction<boolean>>;
 };
 
 export const AuthContext = createContext<AuthContextProps>({
   isAuthenticated: false,
   authUser: null,
   isLoading: true,
-  setAuthenticated: () => {},
 });
