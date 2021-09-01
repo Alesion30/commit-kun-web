@@ -8,6 +8,13 @@ type LoadingProviderProps = {
 
 export const LoadingProvider: VFC<LoadingProviderProps> = ({ children }) => {
   const [isLoading, setLoading] = useState<boolean>(false);
+  const whileLoading = useCallback((func: () => Promise<any>) => {
+    Promise.resolve()
+      .then(() => startLoading())
+      .then(() => func())
+      .finally(endLoading);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const startLoading = useCallback(() => setLoading(true), []);
   const endLoading = useCallback(() => setLoading(false), []);
 
@@ -16,6 +23,7 @@ export const LoadingProvider: VFC<LoadingProviderProps> = ({ children }) => {
       value={{
         isLoading,
         setLoading,
+        whileLoading,
         startLoading,
         endLoading,
       }}
