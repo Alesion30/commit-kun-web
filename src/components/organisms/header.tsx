@@ -36,7 +36,7 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
 
   // プロフィール ドロップダウン
   const profileNavigations: ProfileDropdownNavigation[] = [
-    { name: "Your Profile", href: "" },
+    { name: "Your Profile", href: "#" },
     { name: "Settings", href: "" },
     { name: "Sign out", onClick: onClickSignOut },
   ];

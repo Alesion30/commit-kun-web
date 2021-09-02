@@ -1,4 +1,5 @@
-import React, { VFC, Fragment } from "react";
+import { VFC, Fragment } from "react";
+import Link from "next/link";
 import { Menu, Transition } from "@headlessui/react";
 import { classNames } from "~/utils";
 import { Avatar } from "~/components/atoms/avatar";
@@ -46,16 +47,17 @@ export const ProfileDropdownAvatar: VFC<ProfileDropdownAvatarProps> = ({
           {navigations.map((navigation, index) => (
             <Menu.Item key={`profile_dropdown_avator_menu_item_${index}`}>
               {({ active }) => (
-                <a
-                  href={navigation.href ?? ""}
-                  onClick={navigation.onClick}
-                  className={classNames(
-                    active ? "bg-gray-100" : "",
-                    "block px-4 py-2 text-sm text-gray-700"
-                  )}
-                >
-                  {navigation.name}
-                </a>
+                <Link href={navigation.href ?? ""}>
+                  <a
+                    onClick={navigation.onClick}
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-200"
+                    )}
+                  >
+                    {navigation.name}
+                  </a>
+                </Link>
               )}
             </Menu.Item>
           ))}

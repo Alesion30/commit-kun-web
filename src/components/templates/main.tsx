@@ -22,7 +22,7 @@ export const MainLayout: VFC<MainLayoutProps> = ({ children }) => {
         <title>{appConfig.title}</title>
       </Head>
       <TailwindUIHeader
-        myImageURL={authUser.photoURL}
+        myImageURL={authUser?.photoURL ?? ""}
         onClickSignOut={onClickSignOut}
       />
       <main className="container mx-auto">{children}</main>
