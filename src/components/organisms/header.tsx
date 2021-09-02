@@ -78,7 +78,7 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
                   <div className="flex space-x-4">
                     {navigations.map((item) => (
                       <NavbarLink
-                        key={`navbar_link_${item}`}
+                        key={`navbar_link_${item.name}`}
                         name={item.name}
                         href={item.href}
                         active={pathname === item.href}
@@ -108,7 +108,7 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigations.map((item) => (
                 <NavbarLink
-                  key={`mobile_navbar_link_${item}`}
+                  key={`mobile_navbar_link_${item.name}`}
                   name={item.name}
                   href={item.href}
                   active={pathname === item.href}
