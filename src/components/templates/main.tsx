@@ -17,7 +17,7 @@ export const MainLayout: VFC<MainLayoutProps> = ({ children }) => {
   const { authUser } = useAuth();
   const onClickSignOut = () => signOut();
   return (
-    <div>
+    <>
       <Head>
         <title>{appConfig.title}</title>
       </Head>
@@ -26,6 +26,6 @@ export const MainLayout: VFC<MainLayoutProps> = ({ children }) => {
         onClickSignOut={onClickSignOut}
       />
       <main className="container mx-auto">{children}</main>
-    </div>
+    </>
   );
 };
