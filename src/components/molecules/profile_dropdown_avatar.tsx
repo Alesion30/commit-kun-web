@@ -5,7 +5,7 @@ import { Avatar } from "~/components/atoms/avatar";
 
 export type ProfileDropdownNavigation = {
   name: string;
-  href: string;
+  href?: string;
   onClick?: () => void;
 };
 
@@ -47,7 +47,7 @@ export const ProfileDropdownAvatar: VFC<ProfileDropdownAvatarProps> = ({
             <Menu.Item key={`profile_dropdown_avator_menu_item_${index}`}>
               {({ active }) => (
                 <a
-                  href={navigation.href}
+                  href={navigation.href ?? ""}
                   onClick={navigation.onClick}
                   className={classNames(
                     active ? "bg-gray-100" : "",

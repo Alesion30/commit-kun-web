@@ -6,11 +6,11 @@ import {
   ProfileDropdownNavigation,
 } from "~/components/molecules/profile_dropdown_avatar";
 import { NavbarLink } from "~/components/atoms/link";
+import { useRouter } from "next/router";
 
 type Navigation = {
   name: string;
   href: string;
-  current: boolean;
 };
 
 type TailwindUIHeaderProps = {
@@ -29,18 +29,20 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
 }) => {
   // メイン ナビゲーション
   const navigations: Navigation[] = [
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Team", href: "#", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
+    { name: "Home", href: "/" },
+    { name: "Activity", href: "/activity" },
+    { name: "Friend", href: "/friend" },
   ];
 
   // プロフィール ドロップダウン
   const profileNavigations: ProfileDropdownNavigation[] = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "", onClick: onClickSignOut },
+    { name: "Your Profile", href: "" },
+    { name: "Settings", href: "" },
+    { name: "Sign out", onClick: onClickSignOut },
   ];
+
+  const router = useRouter();
+  const pathname = router.pathname;
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -79,7 +81,7 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
                         key={`navbar_link_${item}`}
                         name={item.name}
                         href={item.href}
-                        active={item.current}
+                        active={pathname === item.href}
                       />
                     ))}
                   </div>
@@ -109,7 +111,7 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
                   key={`mobile_navbar_link_${item}`}
                   name={item.name}
                   href={item.href}
-                  active={item.current}
+                  active={pathname === item.href}
                   className="block text-base font-medium"
                 />
               ))}
