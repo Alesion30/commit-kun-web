@@ -1,3 +1,3 @@
-import useAuth, { useIsAuthenticated } from "./useAuth";
+import useAuth, { useIsAuthenticated } from "./auth";
 
 export { useAuth, useIsAuthenticated };
