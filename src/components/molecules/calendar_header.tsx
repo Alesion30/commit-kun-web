@@ -1,4 +1,5 @@
 import { VFC } from "react";
+import { PagenationButton } from "~/components/atoms/pagenation_button";
 
 type CalendarHeaderProps = {
   /** 年 */
@@ -47,47 +48,10 @@ export const CalendarHeader: VFC<CalendarHeaderProps> = ({
           {year.toString()}
         </span>
       </div>
-      <div className="border rounded-lg px-1" style={{ paddingTop: 2 }}>
-        <button
-          type="button"
-          onClick={onClickPrevMonth}
-          className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
-        >
-          <svg
-            className="h-6 w-6 text-gray-500 inline-flex leading-none"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <div className="border-r inline-flex h-6"></div>
-        <button
-          type="button"
-          onClick={onClickNextMonth}
-          className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1"
-        >
-          <svg
-            className="h-6 w-6 text-gray-500 inline-flex leading-none"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-      </div>
+      <PagenationButton
+        onClickPrev={onClickPrevMonth}
+        onClickNext={onClickNextMonth}
+      />
     </div>
   );
 };
