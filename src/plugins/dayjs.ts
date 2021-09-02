@@ -11,4 +11,5 @@ dayjs.tz.setDefault("Asia/Tokyo");
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
+export type { Dayjs } from "dayjs";
 export default dayjs;
