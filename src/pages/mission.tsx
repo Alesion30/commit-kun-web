@@ -25,7 +25,7 @@ const Mission: NextPage = () => {
           />
           <SimpleCard roundless>
             <div className="flex flex-col items-center">
-              <div className="mx-10 my-5 lg:w-4/5">
+              <div className="sm:mx-10 mx-1 sm:my-5 my-2 lg:w-4/5">
                 <div className="mb-4">
                   <MissionCard title="10時間以上作業しよう" progress={100} />
                 </div>

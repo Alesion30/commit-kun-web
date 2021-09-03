@@ -58,7 +58,7 @@ const Activity: NextPage = () => {
         </div>
       </TailwindUIModal>
 
-      <div className="container mx-auto py-10 text-center">
+      <div className="container mx-auto sm:py-10 py-2 text-center">
         <div className="flex flex-wrap justify-center mb-2">
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
