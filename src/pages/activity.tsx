@@ -66,7 +66,7 @@ const Activity: NextPage = () => {
               label="TOTAL"
               value="25"
               preValue="16"
-              color="pink-400"
+              color="bg-pink-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "レベル",
@@ -83,7 +83,7 @@ const Activity: NextPage = () => {
               label="TOTAL"
               value="2500"
               preValue="1600"
-              color="gray-400"
+              color="bg-gray-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "経験値",
@@ -103,7 +103,7 @@ const Activity: NextPage = () => {
               value="2.5"
               preValue="1.0"
               unit="hour"
-              color="blue-400"
+              color="bg-blue-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コードを書いている時間",
@@ -119,7 +119,7 @@ const Activity: NextPage = () => {
               title="コミット数"
               label={dateStr}
               value="15"
-              color="red-400"
+              color="bg-red-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コミット数",
@@ -136,7 +136,7 @@ const Activity: NextPage = () => {
               label={dateStr}
               value="592"
               unit="words"
-              color="green-400"
+              color="bg-green-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コード量",
@@ -152,7 +152,7 @@ const Activity: NextPage = () => {
               title="PRコメント数"
               label={dateStr}
               value="4"
-              color="yellow-400"
+              color="bg-yellow-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "PRコメント数",

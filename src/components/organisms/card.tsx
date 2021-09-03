@@ -29,7 +29,7 @@ export const StatusCard: VFC<StatusCardProps> = ({
   unit,
   color,
 }) => {
-  const bgColorClassName = color ? `bg-${color}` : "bg-red-400";
+  const bgColorClassName = color ?? "bg-red-400";
   return (
     <div
       onClick={onClick}
