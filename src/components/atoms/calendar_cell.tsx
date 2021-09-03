@@ -4,8 +4,10 @@ import { classNames } from "~/utils";
 type CalendarCellProps = {
   /** 日付 */
   date?: number;
-  /** 今日かどうか */
-  isToday?: boolean;
+  /** アクティブ */
+  active?: boolean;
+  /** 日付をクリック */
+  onClick?: () => void;
 
   /** ボーダーTOP */
   top?: boolean;
@@ -22,7 +24,8 @@ type CalendarCellProps = {
  */
 export const CalendarCell: VFC<CalendarCellProps> = ({
   date,
-  isToday,
+  active,
+  onClick,
   top,
   right,
   bottom,
@@ -30,8 +33,10 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
 }) => {
   return (
     <div
+      onClick={onClick}
       style={{ width: `${100 / 7}%`, height: 130 }}
       className={classNames(
+        onClick ? "cursor-pointer" : "cursor-default",
         top ? "border-t" : "",
         right ? "border-r" : "",
         bottom ? "border-b" : "",
@@ -42,10 +47,10 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
       {date != undefined && (
         <div
           className={classNames(
-            isToday
+            active
               ? "bg-blue-500 text-white"
               : "text-gray-700 hover:bg-blue-200",
-            "absolute top-2 left-2 inline-flex w-8 h-8 items-center justify-center cursor-pointer leading-none rounded-full transition ease-in-out duration-200"
+            "absolute top-2 left-2 inline-flex w-8 h-8 items-center justify-center leading-none rounded-full transition ease-in-out duration-200"
           )}
         >
           {date.toString()}

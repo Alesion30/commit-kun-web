@@ -11,6 +11,10 @@ type CalendarProps = {
   onClickPrevMonth: () => void;
   /** 次の月へ */
   onClickNextMonth: () => void;
+  /** 選択日 */
+  selectedDate: Dayjs;
+  /** 日付をクリック */
+  onClick?: (date: Dayjs) => void;
 };
 
 /**
@@ -22,6 +26,8 @@ export const Calendar: VFC<CalendarProps> = ({
   startMonthDate,
   onClickPrevMonth,
   onClickNextMonth,
+  selectedDate,
+  onClick,
 }) => {
   const dates = new Array<Dayjs | null>(startMonthDate.day()).fill(null);
   const endMonthDate = startMonthDate.endOf("M");
@@ -32,7 +38,7 @@ export const Calendar: VFC<CalendarProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-500 transform hover:scale-100 cursor-pointer overflow-hidden">
       <CalendarHeader
         year={startMonthDate.year()}
         month={startMonthDate.month() + 1}
@@ -43,8 +49,8 @@ export const Calendar: VFC<CalendarProps> = ({
 
       <div className="flex flex-wrap">
         {dates.map((item, index) => {
-          // 今日かどうか
-          const isToday = dayjs().startOf("d").diff(item, "d") === 0;
+          // アクティブかどうか
+          const active = selectedDate.startOf("d").diff(item, "d") === 0;
 
           // 日にち
           const date = item?.date() ?? undefined;
@@ -67,7 +73,8 @@ export const Calendar: VFC<CalendarProps> = ({
             <CalendarCell
               key={`calendar_cell_${index}`}
               date={date}
-              isToday={isToday}
+              onClick={item ? () => onClick(item) : undefined}
+              active={active}
               top={top}
               right={right}
               bottom={bottom}
