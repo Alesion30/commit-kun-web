@@ -52,6 +52,9 @@ export const Calendar: VFC<CalendarProps> = ({
           // アクティブかどうか
           const active = selectedDate.startOf("d").diff(date, "d") === 0;
 
+          // disabledかどうか
+          const disabled = date > dayjs();
+
           // ボーダー
           let top = false;
           let right = true;
@@ -73,6 +76,7 @@ export const Calendar: VFC<CalendarProps> = ({
               date={date}
               onClick={date ? () => onClick(date) : undefined}
               active={active}
+              disabled={disabled}
               top={top}
               right={right}
               bottom={bottom}
