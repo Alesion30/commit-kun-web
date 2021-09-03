@@ -98,7 +98,7 @@ const Activity: NextPage = () => {
         <div className="flex flex-wrap justify-center mb-10">
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
-              title="コードを書いている時間"
+              title="作業時間"
               label={dateStr}
               value="2.5"
               preValue="1.0"
@@ -106,7 +106,7 @@ const Activity: NextPage = () => {
               color="bg-blue-400"
               onClick={() => {
                 setDailyBarContent({
-                  title: "コードを書いている時間",
+                  title: "作業時間",
                   data: mockData,
                   color: "blue",
                 });
