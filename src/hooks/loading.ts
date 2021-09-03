@@ -5,7 +5,7 @@ import { LoadingContext, LoadingContextProps } from "~/providers/loading";
 export default function useLoading(): LoadingContextProps {
   const context = useContext(LoadingContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error("useLoading must be used within an LoadingProvider");
   }
   return context;
 }

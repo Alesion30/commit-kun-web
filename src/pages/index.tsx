@@ -5,7 +5,7 @@
 import { NextPage } from "next";
 import { MainLayout } from "~/components/templates/main";
 import { withAuth } from "~/hocs";
-import useLoading from "~/hooks/useLoading";
+import useLoading from "~/hooks/loading";
 
 const Home: NextPage = () => {
   const { whileLoading } = useLoading();

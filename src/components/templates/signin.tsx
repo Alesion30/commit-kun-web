@@ -15,7 +15,7 @@ export const SigninLayout: VFC<SigninLayoutProps> = ({
   onClickGithubSignin,
 }) => {
   return (
-    <div>
+    <>
       <Head>
         <title>{appConfig.title}</title>
       </Head>
@@ -50,6 +50,6 @@ export const SigninLayout: VFC<SigninLayoutProps> = ({
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 };

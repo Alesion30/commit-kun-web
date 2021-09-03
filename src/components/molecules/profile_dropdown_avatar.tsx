@@ -1,11 +1,12 @@
-import React, { VFC, Fragment } from "react";
+import { VFC, Fragment } from "react";
+import Link from "next/link";
 import { Menu, Transition } from "@headlessui/react";
 import { classNames } from "~/utils";
 import { Avatar } from "~/components/atoms/avatar";
 
 export type ProfileDropdownNavigation = {
   name: string;
-  href: string;
+  href?: string;
   onClick?: () => void;
 };
 
@@ -42,20 +43,21 @@ export const ProfileDropdownAvatar: VFC<ProfileDropdownAvatarProps> = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
           {navigations.map((navigation, index) => (
             <Menu.Item key={`profile_dropdown_avator_menu_item_${index}`}>
               {({ active }) => (
-                <a
-                  href={navigation.href}
-                  onClick={navigation.onClick}
-                  className={classNames(
-                    active ? "bg-gray-100" : "",
-                    "block px-4 py-2 text-sm text-gray-700"
-                  )}
-                >
-                  {navigation.name}
-                </a>
+                <Link href={navigation.href ?? ""}>
+                  <a
+                    onClick={navigation.onClick}
+                    className={classNames(
+                      active ? "bg-gray-100" : "",
+                      "block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-200"
+                    )}
+                  >
+                    {navigation.name}
+                  </a>
+                </Link>
               )}
             </Menu.Item>
           ))}

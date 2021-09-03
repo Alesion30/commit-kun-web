@@ -6,11 +6,11 @@ import {
   ProfileDropdownNavigation,
 } from "~/components/molecules/profile_dropdown_avatar";
 import { NavbarLink } from "~/components/atoms/link";
+import { useRouter } from "next/router";
 
 type Navigation = {
   name: string;
   href: string;
-  current: boolean;
 };
 
 type TailwindUIHeaderProps = {
@@ -29,18 +29,20 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
 }) => {
   // メイン ナビゲーション
   const navigations: Navigation[] = [
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Team", href: "#", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
+    { name: "Home", href: "/" },
+    { name: "Activity", href: "/activity" },
+    { name: "Friend", href: "/friend" },
   ];
 
   // プロフィール ドロップダウン
   const profileNavigations: ProfileDropdownNavigation[] = [
     { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "", onClick: onClickSignOut },
+    { name: "Settings", href: "" },
+    { name: "Sign out", onClick: onClickSignOut },
   ];
+
+  const router = useRouter();
+  const pathname = router.pathname;
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -76,10 +78,10 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
                   <div className="flex space-x-4">
                     {navigations.map((item) => (
                       <NavbarLink
-                        key={`navbar_link_${item}`}
+                        key={`navbar_link_${item.name}`}
                         name={item.name}
                         href={item.href}
-                        active={item.current}
+                        active={pathname === item.href}
                       />
                     ))}
                   </div>
@@ -106,10 +108,10 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigations.map((item) => (
                 <NavbarLink
-                  key={`mobile_navbar_link_${item}`}
+                  key={`mobile_navbar_link_${item.name}`}
                   name={item.name}
                   href={item.href}
-                  active={item.current}
+                  active={pathname === item.href}
                   className="block text-base font-medium"
                 />
               ))}
