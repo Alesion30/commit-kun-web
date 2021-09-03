@@ -6,6 +6,7 @@ type StatusCardProps = {
   title: string;
   value: string;
   preValue?: string;
+  onClick?: () => void;
   /** ラベル */
   label: string;
   /** 単位 */
@@ -23,13 +24,17 @@ export const StatusCard: VFC<StatusCardProps> = ({
   title,
   value,
   preValue,
+  onClick,
   label,
   unit,
   color,
 }) => {
   const bgColorClassName = color ? `bg-${color}` : "bg-red-400";
   return (
-    <div className="w-full bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition duration-500 transform hover:scale-100 cursor-pointer">
+    <div
+      onClick={onClick}
+      className="w-full bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition duration-500 transform hover:scale-100 cursor-pointer"
+    >
       <div
         className={classNames(
           bgColorClassName,
