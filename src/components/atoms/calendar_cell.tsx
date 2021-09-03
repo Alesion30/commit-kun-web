@@ -41,7 +41,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
       onClick={onClick}
       style={{ width: `${100 / 7}%`, height: 130 }}
       className={classNames(
-        onClick ? "cursor-pointer" : "cursor-default",
+        onClick ? "cursor-pointer hover:bg-blue-100 transition ease-in-out duration-500" : "cursor-default",
         top ? "border-t" : "",
         right ? "border-r" : "",
         bottom ? "border-b" : "",
@@ -54,7 +54,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
           className={classNames(
             active
               ? "bg-blue-500 text-white"
-              : `${dateColor} hover:bg-blue-200`,
+              : `${dateColor}`,
             "absolute top-2 left-2 inline-flex w-8 h-8 items-center justify-center leading-none rounded-full transition ease-in-out duration-200"
           )}
         >

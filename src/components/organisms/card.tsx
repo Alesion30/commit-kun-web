@@ -1,10 +1,9 @@
 import { VFC } from "react";
 import { classNames } from "~/utils";
-import { Dayjs } from "~/plugins/dayjs";
 
 type StatusCardProps = {
   title: string;
-  value: string;
+  value?: string;
   preValue?: string;
   onClick?: () => void;
   /** ラベル */
@@ -54,7 +53,7 @@ export const StatusCard: VFC<StatusCardProps> = ({
             &nbsp;-&gt;&nbsp;
           </span>
         )}
-        <span className="text-3xl">{value}</span>
+        <span className="text-3xl">{value ?? "-"}</span>
         {unit && <span className="text-2xl">{unit}</span>}
       </p>
     </div>
