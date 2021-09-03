@@ -48,12 +48,9 @@ export const Calendar: VFC<CalendarProps> = ({
       <CalendarDayColumn />
 
       <div className="flex flex-wrap">
-        {dates.map((item, index) => {
+        {dates.map((date, index) => {
           // アクティブかどうか
-          const active = selectedDate.startOf("d").diff(item, "d") === 0;
-
-          // 日にち
-          const date = item?.date() ?? undefined;
+          const active = selectedDate.startOf("d").diff(date, "d") === 0;
 
           // ボーダー
           let top = false;
@@ -67,13 +64,14 @@ export const Calendar: VFC<CalendarProps> = ({
           if (index % 7 == 6) right = false;
 
           // 一番下の列
-          if (date >= endMonthDate.date() - endMonthDate.day()) bottom = false;
+          if (date?.date() >= endMonthDate.date() - endMonthDate.day())
+            bottom = false;
 
           return (
             <CalendarCell
               key={`calendar_cell_${index}`}
               date={date}
-              onClick={item ? () => onClick(item) : undefined}
+              onClick={date ? () => onClick(date) : undefined}
               active={active}
               top={top}
               right={right}

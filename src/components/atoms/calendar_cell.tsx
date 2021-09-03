@@ -1,9 +1,10 @@
 import { VFC } from "react";
 import { classNames } from "~/utils";
+import { Dayjs } from "~/plugins/dayjs";
 
 type CalendarCellProps = {
   /** 日付 */
-  date?: number;
+  date?: Dayjs;
   /** アクティブ */
   active?: boolean;
   /** 日付をクリック */
@@ -31,6 +32,10 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
   bottom,
   left,
 }) => {
+  let dateColor = "text-gray-700";
+  if (date?.day() === 0) dateColor = "text-red-700"; // 日曜日
+  if (date?.day() === 6) dateColor = "text-blue-700"; // 土曜日
+
   return (
     <div
       onClick={onClick}
@@ -49,11 +54,11 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
           className={classNames(
             active
               ? "bg-blue-500 text-white"
-              : "text-gray-700 hover:bg-blue-200",
+              : `${dateColor} hover:bg-blue-200`,
             "absolute top-2 left-2 inline-flex w-8 h-8 items-center justify-center leading-none rounded-full transition ease-in-out duration-200"
           )}
         >
-          {date.toString()}
+          {date.format("D")}
         </div>
       )}
     </div>
