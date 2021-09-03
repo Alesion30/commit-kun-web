@@ -18,5 +18,13 @@ export const ProgressCircleIcon: VFC<ProgressCircleIconProps> = ({
     setTimeout(setCount, 100, percentage);
   }, [percentage]);
 
-  return <Circle animate={true} progress={count} />;
+  return (
+    <Circle
+      animate={true}
+      progress={count}
+      roundedStroke={true}
+      showPercentage={false}
+      responsive={true}
+    />
+  );
 };
