@@ -38,7 +38,7 @@ export const Calendar: VFC<CalendarProps> = ({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-500 transform hover:scale-100 cursor-pointer overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md hover:shadow-xl border transition duration-500 transform hover:scale-100 cursor-pointer overflow-hidden">
       <CalendarHeader
         year={startMonthDate.year()}
         month={startMonthDate.month() + 1}

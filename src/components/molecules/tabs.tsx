@@ -9,7 +9,7 @@ type TabsProps = {
 
 export const Tabs: VFC<TabsProps> = ({ tabs, activeIndex, onClick }) => {
   return (
-    <ul className="flex cursor-pointer">
+    <ul className="flex">
       {tabs.map((tab, index) => {
         const active = activeIndex === index;
         return (

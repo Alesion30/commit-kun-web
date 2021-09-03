@@ -18,7 +18,7 @@ export const TabCell: VFC<TabCellProps> = ({ name, active, onClick }) => {
       onClick={onClick}
       className={classNames(
         active ? "bg-pink-400" : "bg-gray-100",
-        "py-2 px-6 rounded-t-lg border border-gray-200"
+        "py-2 px-6 rounded-t-lg border-t border-l border-r border-gray-200 cursor-pointer"
       )}
     >
       <span

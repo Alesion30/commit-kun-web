@@ -46,7 +46,9 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
       onClick={_onClick}
       style={{ width: `${100 / 7}%`, height: 130 }}
       className={classNames(
-        _onClick ? "cursor-pointer hover:bg-blue-100 transition ease-in-out duration-500" : "cursor-default",
+        _onClick
+          ? "cursor-pointer hover:bg-blue-100 transition ease-in-out duration-500"
+          : "cursor-default",
         disabled ? "bg-gray-100" : "",
         top ? "border-t" : "",
         right ? "border-r" : "",
@@ -58,9 +60,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
       {date != undefined && (
         <div
           className={classNames(
-            active
-              ? "bg-blue-500 text-white"
-              : `${dateColor}`,
+            active ? "bg-blue-500 text-white" : `${dateColor}`,
             "absolute top-2 left-2 inline-flex w-8 h-8 items-center justify-center leading-none rounded-full transition ease-in-out duration-200"
           )}
         >

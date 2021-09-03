@@ -1,61 +1,32 @@
-import { VFC } from "react";
+import { VFC, ReactNode } from "react";
 import { classNames } from "~/utils";
 
-type StatusCardProps = {
-  title: string;
-  value?: string;
-  preValue?: string;
+type SimpleCardProps = {
   onClick?: () => void;
-  /** ラベル */
-  label: string;
-  /** 単位 */
-  unit?: string;
-  /** tailwindの色を指定(eg. red-400) */
-  color?: string;
+  children: ReactNode;
+  roundless?: boolean;
 };
 
 /**
- * Organism: ステータスカード
- *
- * https://tailwindcomponents.com/component/dashboard-stats
+ * Organism: シンプルカード
  */
-export const StatusCard: VFC<StatusCardProps> = ({
-  title,
-  value,
-  preValue,
+export const SimpleCard: VFC<SimpleCardProps> = ({
   onClick,
-  label,
-  unit,
-  color,
+  children,
+  roundless,
 }) => {
-  const bgColorClassName = color ?? "bg-red-400";
   return (
     <div
       onClick={onClick}
-      className="w-full bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition duration-500 transform hover:scale-100 cursor-pointer"
+      className={classNames(
+        roundless ? "rounded-none" : "rounded-lg",
+        onClick
+          ? "hover:shadow-xl transition duration-500 transform hover:scale-100 cursor-pointer"
+          : "",
+        "w-full bg-white overflow-hidden shadow-md border"
+      )}
     >
-      <div
-        className={classNames(
-          bgColorClassName,
-          "h-20 flex items-center justify-between"
-        )}
-      >
-        <p className="mr-0 text-white text-lg px-5">{title}</p>
-      </div>
-      <div className="flex justify-between px-5 pt-6 mb-2 text-md text-gray-600">
-        <p>{label}</p>
-      </div>
-      <p className="py-4 text-left mx-5">
-        {preValue && (
-          <span className="text-2xl text-red-500">
-            {preValue}
-            <span className="text-xl">{unit}</span>
-            &nbsp;-&gt;&nbsp;
-          </span>
-        )}
-        <span className="text-3xl">{value ?? "-"}</span>
-        {unit && <span className="text-2xl">{unit}</span>}
-      </p>
+      {children}
     </div>
   );
 };

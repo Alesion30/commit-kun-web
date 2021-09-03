@@ -8,7 +8,7 @@ import dayjs, { Dayjs } from "~/plugins/dayjs";
 import { MainLayout } from "~/components/templates/main";
 import { Calendar } from "~/components/organisms/calendar";
 import { withAuth } from "~/hocs";
-import { StatusCard } from "~/components/organisms/card";
+import { StatusCard } from "~/components/organisms/status_card";
 import { TailwindUIModal } from "~/components/organisms/modal";
 import {
   ChartJSDailyBar,
