@@ -29,9 +29,10 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
 }) => {
   // メイン ナビゲーション
   const navigations: Navigation[] = [
-    { name: "Home", href: "/" },
-    { name: "Activity", href: "/activity" },
-    { name: "Friend", href: "/friend" },
+    { name: "ホーム", href: "/" },
+    { name: "ミッション", href: "/mission" },
+    { name: "アクティビティ", href: "/activity" },
+    { name: "フレンド", href: "/friend" },
   ];
 
   // プロフィール ドロップダウン
