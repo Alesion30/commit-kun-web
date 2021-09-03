@@ -49,7 +49,7 @@ const Activity: NextPage = () => {
   return (
     <MainLayout>
       <TailwindUIModal open={open} onClose={onClickClose}>
-        <div className="p-10">
+        <div className="sm:p-10 p-2">
           <ChartJSDailyBar
             title={dailyBarContent.title}
             data={dailyBarContent.data}
