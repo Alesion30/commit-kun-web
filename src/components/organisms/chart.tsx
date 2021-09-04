@@ -18,32 +18,32 @@ type BarColor = {
 
 const BAR_COLORS: { [P in ColorType]: BarColor } = {
   red: {
-    background: "rgba(255, 99, 132, 0.2)",
-    border: "rgba(255, 99, 132)",
+    background: "rgba(248, 113, 113, 0.2)",
+    border: "rgba(248, 113, 113)",
   },
   pink: {
     background: "rgba(244, 114, 182, 0.2)",
     border: "rgba(244, 114, 182)",
   },
   yellow: {
-    background: "rgba(255, 205, 86, 0.2)",
-    border: "rgba(255, 205, 86)",
+    background: "rgba(251, 191, 36, 0.2)",
+    border: "rgba(251, 191, 36)",
   },
   green: {
-    background: "rgba(75, 192, 192, 0.2)",
-    border: "rgba(75, 192, 192)",
+    background: "rgba(52, 211, 153, 0.2)",
+    border: "rgba(52, 211, 153)",
   },
   blue: {
-    background: "rgba(54, 162, 235, 0.2)",
-    border: "rgba(54, 162, 235)",
+    background: "rgba(96, 165, 250, 0.2)",
+    border: "rgba(96, 165, 250)",
   },
   purple: {
-    background: "rgba(153, 102, 255, 0.2)",
-    border: "rgba(153, 102, 255)",
+    background: "rgba(167, 139, 250, 0.2)",
+    border: "rgba(167, 139, 250)",
   },
   gray: {
-    background: "rgba(201, 203, 207, 0.2)",
-    border: "rgba(201, 203, 207)",
+    background: "rgba(156, 163, 175, 0.2)",
+    border: "rgba(156, 163, 175)",
   },
 };
 
