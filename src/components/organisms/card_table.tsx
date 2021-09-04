@@ -24,55 +24,59 @@ export const CardTable: VFC<CardTableProps> = ({
 }) => {
   const bgColorClassName = color ? `bg-${color}` : "bg-red-400";
   return (
-    <div className="container mr-5 mx-auto bg-white shadow-xl">
-      <div className="w-11/12 mx-auto">
-        <div className="bg-white my-6">
-          <table className="text-left w-full border-collapse">
-            <thead>
-              <tr>
-                <th
-                  className={classNames(
-                    bgColorClassName,
-                    "w-1/6 py-4 px-6 text-center font-bold uppercase text-sm text-white border-b border-grey-light"
-                  )}
-                >
-                  {title1}
-                </th>
-                <th
-                  className={classNames(
-                    bgColorClassName,
-                    "w-3/6 py-4 px-6 text-center font-bold uppercase text-sm text-white border-b border-grey-light"
-                  )}
-                >
-                  {title2}
-                </th>
-                <th
-                  className={classNames(
-                    bgColorClassName,
-                    "w-1/2 py-4 px-6 text-center font-bold uppercase text-sm text-white border-b border-grey-light"
-                  )}
-                >
-                  {title3}
-                </th>
+    <div className="container bg-white shadow-xl h-full">
+      <div className="bg-white h-full rounded">
+        <table className="w-full h-full text-left border-collapse">
+          <thead className="table table-fixed w-full">
+            <tr>
+              <th
+                className={classNames(
+                  bgColorClassName,
+                  "w-1/6 text-center font-bold uppercase text-sm text-white border-b border-grey-light"
+                )}
+                style={{ padding: "3%" }}
+              >
+                {title1}
+              </th>
+              <th
+                className={classNames(
+                  bgColorClassName,
+                  "w-3/6 text-center font-bold uppercase text-sm text-white border-b border-grey-light"
+                )}
+                style={{ padding: "3%" }}
+              >
+                {title2}
+              </th>
+              <th
+                className={classNames(
+                  bgColorClassName,
+                  "w-2/6 text-center font-bold uppercase text-sm text-white border-b border-grey-light"
+                )}
+                style={{ padding: "3%" }}
+              >
+                {title3}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="block h-5/6 w-full overflow-y-scroll">
+            {items.map((item, index) => (
+              <tr
+                className="hover:bg-grey-lighter table table-fixed w-full"
+                key={item.name}
+              >
+                <td className="w-1/6 py-4 px-6 text-center border-b border-grey-light">
+                  {index + 1}
+                </td>
+                <td className="w-3/6 py-4 px-6 text-center border-b border-grey-light">
+                  {item.name}
+                </td>
+                <td className="w-2/6 py-4 px-6 text-center border-b border-grey-light">
+                  {item.level}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {items.map((item, index) => (
-                <tr className="hover:bg-grey-lighter" key={item.name}>
-                  <td className="py-4 px-6 border-b border-grey-light">
-                    {index + 1}
-                  </td>
-                  <td className="py-4 px-6 text-center border-b border-grey-light">
-                    {item.name}
-                  </td>
-                  <td className="py-4 px-6 text-center border-b border-grey-light">
-                    {item.level}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
