@@ -1,10 +1,15 @@
 import { VFC } from "react";
+import { classNames } from "~/utils";
 
 type PagenationButtonProps = {
   /** 前へ */
   onClickPrev: () => void;
   /** 次へ */
   onClickNext: () => void;
+  /** 前へ disabled */
+  disabledPrev?: boolean;
+  /** 次へ disabled */
+  disabledNext?: boolean;
 };
 
 /**
@@ -13,13 +18,20 @@ type PagenationButtonProps = {
 export const PagenationButton: VFC<PagenationButtonProps> = ({
   onClickPrev,
   onClickNext,
+  disabledPrev,
+  disabledNext,
 }) => {
   return (
     <div className="border rounded-lg px-1" style={{ paddingTop: 2 }}>
       <button
         type="button"
-        onClick={onClickPrev}
-        className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 items-center"
+        onClick={disabledPrev ? undefined : onClickPrev}
+        className={classNames(
+          disabledPrev
+            ? "cursor-default bg-gray-200"
+            : "cursor-pointer transition ease-in-out duration-200 hover:bg-gray-200",
+          "leading-none rounded-lg inline-flex p-1 items-center mr-1"
+        )}
       >
         <svg
           className="h-6 w-6 text-gray-500 inline-flex leading-none"
@@ -38,8 +50,13 @@ export const PagenationButton: VFC<PagenationButtonProps> = ({
       <div className="border-r inline-flex h-6"></div>
       <button
         type="button"
-        onClick={onClickNext}
-        className="leading-none rounded-lg transition ease-in-out duration-100 inline-flex items-center cursor-pointer hover:bg-gray-200 p-1"
+        onClick={disabledNext ? undefined : onClickNext}
+        className={classNames(
+          disabledNext
+          ? "cursor-default bg-gray-200"
+            : "cursor-pointer transition ease-in-out duration-200 hover:bg-gray-200",
+          "leading-none rounded-lg inline-flex p-1 items-center ml-1"
+        )}
       >
         <svg
           className="h-6 w-6 text-gray-500 inline-flex leading-none"

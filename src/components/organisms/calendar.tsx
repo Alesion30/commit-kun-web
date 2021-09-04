@@ -29,6 +29,7 @@ export const Calendar: VFC<CalendarProps> = ({
   selectedDate,
   onClick,
 }) => {
+  const now = dayjs();
   const dates = new Array<Dayjs | null>(startMonthDate.day()).fill(null);
   const endMonthDate = startMonthDate.endOf("M");
   let date = startMonthDate;
@@ -44,6 +45,8 @@ export const Calendar: VFC<CalendarProps> = ({
         month={startMonthDate.month() + 1}
         onClickPrevMonth={onClickPrevMonth}
         onClickNextMonth={onClickNextMonth}
+        disabledPrevMonth={false}
+        disabledNextMonth={startMonthDate.add(1, 'M') > now}
       />
       <CalendarDayColumn />
 
@@ -52,8 +55,8 @@ export const Calendar: VFC<CalendarProps> = ({
           // アクティブかどうか
           const active = selectedDate.startOf("d").diff(date, "d") === 0;
 
-          // disabledかどうか
-          const disabled = date > dayjs();
+          // disabledかどうか（未来の日付は選択できないようにする）
+          const disabled = date > now;
 
           // ボーダー
           let top = false;

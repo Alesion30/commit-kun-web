@@ -10,6 +10,10 @@ type CalendarHeaderProps = {
   onClickPrevMonth: () => void;
   /** 次の月へ */
   onClickNextMonth: () => void;
+  /** 前の月へ disabled */
+  disabledPrevMonth?: boolean;
+  /** 次の月へ disabled */
+  disabledNextMonth?: boolean;
 };
 
 /**
@@ -23,6 +27,8 @@ export const CalendarHeader: VFC<CalendarHeaderProps> = ({
   month,
   onClickPrevMonth,
   onClickNextMonth,
+  disabledPrevMonth,
+  disabledNextMonth,
 }) => {
   const MONTH_NAMES = [
     "January",
@@ -51,6 +57,8 @@ export const CalendarHeader: VFC<CalendarHeaderProps> = ({
       <PagenationButton
         onClickPrev={onClickPrevMonth}
         onClickNext={onClickNextMonth}
+        disabledPrev={disabledPrevMonth}
+        disabledNext={disabledNextMonth}
       />
     </div>
   );
