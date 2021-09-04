@@ -3,6 +3,7 @@ import {
   getAuth,
   GithubAuthProvider,
   signInWithRedirect,
+  signInWithPopup,
   signOut as fbSignOut,
   onAuthStateChanged as fbOnAuthStateChanged,
   User as FirebaseUser,
@@ -31,8 +32,7 @@ const firebaseAuth = getAuth(firebaseApp);
 const githubProvider = new GithubAuthProvider();
 
 /** Githubログイン */
-export const signInGithub = () =>
-  signInWithRedirect(firebaseAuth, githubProvider);
+export const signInGithub = () => signInWithPopup(firebaseAuth, githubProvider);
 
 /** ログアウト */
 export const signOut = () => fbSignOut(firebaseAuth);
@@ -45,3 +45,7 @@ export const onAuthStateChanged = (
 
 /** ユーザー型 */
 export type User = FirebaseUser;
+
+/** GitHubのcredential情報を取得 */
+export const credentialFromResultGitHub =
+  GithubAuthProvider.credentialFromResult;
