@@ -53,7 +53,7 @@ export const PagenationButton: VFC<PagenationButtonProps> = ({
         onClick={disabledNext ? undefined : onClickNext}
         className={classNames(
           disabledNext
-          ? "cursor-default bg-gray-200"
+            ? "cursor-default bg-gray-200"
             : "cursor-pointer transition ease-in-out duration-200 hover:bg-gray-200",
           "leading-none rounded-lg inline-flex p-1 items-center ml-1"
         )}

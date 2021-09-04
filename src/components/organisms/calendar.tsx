@@ -46,7 +46,7 @@ export const Calendar: VFC<CalendarProps> = ({
         onClickPrevMonth={onClickPrevMonth}
         onClickNextMonth={onClickNextMonth}
         disabledPrevMonth={false}
-        disabledNextMonth={startMonthDate.add(1, 'M') > now}
+        disabledNextMonth={startMonthDate.add(1, "M") > now}
       />
       <CalendarDayColumn />
 
