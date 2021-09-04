@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import { VFC, useState, useEffect } from "react";
 import { SimpleCard } from "~/components/organisms/card";
 import { classNames } from "~/utils";
 
@@ -30,6 +30,13 @@ export const StatusCard: VFC<StatusCardProps> = ({
   color,
 }) => {
   const bgColorClassName = color ?? "bg-red-400";
+  const [opacity, setOpacity] = useState<number>(0);
+
+  useEffect(() => {
+    setOpacity(0);
+    setTimeout(setOpacity, 100, 1);
+  }, [value, preValue]);
+
   return (
     <SimpleCard onClick={onClick}>
       <div
@@ -43,7 +50,10 @@ export const StatusCard: VFC<StatusCardProps> = ({
       <div className="flex justify-between px-5 pt-6 mb-2 text-md text-gray-600">
         <p>{label}</p>
       </div>
-      <p className="py-4 text-left mx-5">
+      <p
+        style={{ opacity: opacity }}
+        className="py-4 text-left mx-5 transition duration-700 ease-in-out"
+      >
         {preValue && (
           <span className="text-2xl text-red-500">
             {preValue}
