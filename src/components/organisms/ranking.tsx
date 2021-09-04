@@ -36,7 +36,7 @@ export const Ranking: VFC<RankingProps> = ({}) => {
       <div>
         <p className="text-3xl text-center font-medium">Ranking</p>
       </div>
-      <div className="h-1/2 m-2">
+      <div className="h-2/3 m-2">
         <CardTable
           title1="Rank"
           title2="Name"

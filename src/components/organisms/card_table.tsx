@@ -25,7 +25,7 @@ export const CardTable: VFC<CardTableProps> = ({
   const bgColorClassName = color ? `bg-${color}` : "bg-red-400";
   return (
     <div className="container bg-white shadow-xl h-full">
-      <div className="bg-white h-full rounded">
+      <div className="bg-white h-full">
         <table className="w-full h-full text-left border-collapse">
           <thead className="table table-fixed w-full">
             <tr>
