@@ -8,7 +8,12 @@ import dayjs, { Dayjs } from "~/plugins/dayjs";
 import { MainLayout } from "~/components/templates/main";
 import { Calendar } from "~/components/organisms/calendar";
 import { withAuth } from "~/hocs";
-import { StatusCard } from "~/components/organisms/card";
+import { StatusCard } from "~/components/organisms/status_card";
+import { TailwindUIModal } from "~/components/organisms/modal";
+import {
+  ChartJSDailyBar,
+  ChartJSDailyBarProps,
+} from "~/components/organisms/chart";
 
 const Activity: NextPage = () => {
   // カレンダー年月
@@ -28,9 +33,33 @@ const Activity: NextPage = () => {
   const [date, setDate] = useState<Dayjs>(dayjs());
   const dateStr = date.format("YYYY年MM月DD日");
 
+  // モーダル
+  const [open, setOpen] = useState<boolean>(false);
+  const onClickOpen = () => setOpen(true);
+  const onClickClose = () => setOpen(false);
+
+  // DailyBar コンテンツ
+  const [dailyBarContent, setDailyBarContent] = useState<ChartJSDailyBarProps>({
+    title: "",
+    data: [],
+    color: "blue",
+  });
+  const mockData = [...Array(24)].map((_, __) => Math.random() * 100);
+
   return (
     <MainLayout>
-      <div className="container mx-auto py-10 text-center">
+      <TailwindUIModal open={open} onClose={onClickClose}>
+        <div className="sm:px-10 sm:py-6 p-2 text-center text-gray-700">
+          <h2 className="text-2xl font-medium mb-2">{dateStr}</h2>
+          <ChartJSDailyBar
+            title={dailyBarContent.title}
+            data={dailyBarContent.data}
+            color={dailyBarContent.color}
+          />
+        </div>
+      </TailwindUIModal>
+
+      <div className="container mx-auto sm:py-10 py-2 text-center">
         <div className="flex flex-wrap justify-center mb-2">
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
@@ -38,7 +67,15 @@ const Activity: NextPage = () => {
               label="TOTAL"
               value="25"
               preValue="16"
-              color="pink-400"
+              color="bg-pink-400"
+              onClick={() => {
+                setDailyBarContent({
+                  title: "レベル",
+                  data: mockData,
+                  color: "pink",
+                });
+                onClickOpen();
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -47,19 +84,35 @@ const Activity: NextPage = () => {
               label="TOTAL"
               value="2500"
               preValue="1600"
-              color="gray-400"
+              color="bg-gray-400"
+              onClick={() => {
+                setDailyBarContent({
+                  title: "経験値",
+                  data: mockData,
+                  color: "gray",
+                });
+                onClickOpen();
+              }}
             />
           </div>
         </div>
         <div className="flex flex-wrap justify-center mb-10">
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
-              title="コードを書いている時間"
+              title="作業時間"
               label={dateStr}
               value="2.5"
               preValue="1.0"
               unit="hour"
-              color="blue-400"
+              color="bg-blue-400"
+              onClick={() => {
+                setDailyBarContent({
+                  title: "作業時間",
+                  data: mockData,
+                  color: "blue",
+                });
+                onClickOpen();
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -67,7 +120,15 @@ const Activity: NextPage = () => {
               title="コミット数"
               label={dateStr}
               value="15"
-              color="red-400"
+              color="bg-red-400"
+              onClick={() => {
+                setDailyBarContent({
+                  title: "コミット数",
+                  data: mockData,
+                  color: "red",
+                });
+                onClickOpen();
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -76,7 +137,15 @@ const Activity: NextPage = () => {
               label={dateStr}
               value="592"
               unit="words"
-              color="green-400"
+              color="bg-green-400"
+              onClick={() => {
+                setDailyBarContent({
+                  title: "コード量",
+                  data: mockData,
+                  color: "green",
+                });
+                onClickOpen();
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -84,7 +153,15 @@ const Activity: NextPage = () => {
               title="PRコメント数"
               label={dateStr}
               value="4"
-              color="yellow-400"
+              color="bg-yellow-400"
+              onClick={() => {
+                setDailyBarContent({
+                  title: "PRコメント数",
+                  data: mockData,
+                  color: "yellow",
+                });
+                onClickOpen();
+              }}
             />
           </div>
         </div>

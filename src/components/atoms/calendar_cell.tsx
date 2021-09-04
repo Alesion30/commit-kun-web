@@ -9,6 +9,8 @@ type CalendarCellProps = {
   active?: boolean;
   /** 日付をクリック */
   onClick?: () => void;
+  /** disabled */
+  disabled?: boolean;
 
   /** ボーダーTOP */
   top?: boolean;
@@ -27,6 +29,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
   date,
   active,
   onClick,
+  disabled,
   top,
   right,
   bottom,
@@ -36,12 +39,17 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
   if (date?.day() === 0) dateColor = "text-red-700"; // 日曜日
   if (date?.day() === 6) dateColor = "text-blue-700"; // 土曜日
 
+  const _onClick = disabled ? undefined : onClick;
+
   return (
     <div
-      onClick={onClick}
+      onClick={_onClick}
       style={{ width: `${100 / 7}%`, height: 130 }}
       className={classNames(
-        onClick ? "cursor-pointer" : "cursor-default",
+        _onClick
+          ? "cursor-pointer hover:bg-blue-100 transition ease-in-out duration-500"
+          : "cursor-default",
+        disabled ? "bg-gray-100" : "",
         top ? "border-t" : "",
         right ? "border-r" : "",
         bottom ? "border-b" : "",
@@ -52,9 +60,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
       {date != undefined && (
         <div
           className={classNames(
-            active
-              ? "bg-blue-500 text-white"
-              : `${dateColor} hover:bg-blue-200`,
+            active ? "bg-blue-500 text-white" : `${dateColor}`,
             "absolute top-2 left-2 inline-flex w-8 h-8 items-center justify-center leading-none rounded-full transition ease-in-out duration-200"
           )}
         >
