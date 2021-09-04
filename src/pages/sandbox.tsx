@@ -15,7 +15,7 @@ const Sandbox: NextPage = () => {
         <div className="flex-1">
           <Level level={20} progress={50} />
         </div>
-        <div className="flex-1">
+        <div className="flex-1 p-10">
           <Ranking />
         </div>
       </div>

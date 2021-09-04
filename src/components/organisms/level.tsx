@@ -14,7 +14,7 @@ export const Level: VFC<LevelProps> = ({ level, progress }) => {
       <div>
         <p className="text-5xl text-center font-medium">level {level}</p>
       </div>
-      <div className="relative">
+      <div className="relative" style={{ margin: "8%" }}>
         <ProgressCircleIcon percentage={progress} />
         <div className="absolute h-full w-full bottom-0">
           <img

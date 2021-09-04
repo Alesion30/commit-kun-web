@@ -15,6 +15,12 @@ export const Ranking: VFC<RankingProps> = ({}) => {
     { name: "D", level: 99 },
     { name: "E", level: 11 },
     { name: "F", level: 45 },
+    { name: "G", level: 15 },
+    { name: "H", level: 36 },
+    { name: "I", level: 43 },
+    { name: "J", level: 1 },
+    { name: "K", level: 14 },
+    { name: "L", level: 45 },
   ];
   const sortedLevels = levels.sort(function (a, b) {
     if (a.level > b.level) return -1;
@@ -28,9 +34,9 @@ export const Ranking: VFC<RankingProps> = ({}) => {
       style={{ margin: "5%" }}
     >
       <div>
-        <p>Ranking</p>
+        <p className="text-3xl text-center font-medium">Ranking</p>
       </div>
-      <div>
+      <div className="h-1/2 m-2">
         <CardTable
           title1="Rank"
           title2="Name"
