@@ -12,12 +12,12 @@ import { Tabs } from "~/components/molecules/tabs";
 
 const Mission: NextPage = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const TABS = ["デイリー", "ノーマル", "期間限定"];
+  const TABS = ["デイリー", "ノーマル"];
 
   return (
     <MainLayout>
       <div className="flex justify-center">
-        <div className="mt-5 lg:w-4/5">
+        <div className="mt-5 xl:w-4/5 w-full px-2">
           <Tabs
             tabs={TABS}
             activeIndex={activeIndex}
@@ -27,18 +27,24 @@ const Mission: NextPage = () => {
             <div className="flex flex-col items-center">
               <div className="sm:mx-10 mx-1 sm:my-5 my-2 lg:w-4/5">
                 <div className="mb-4">
-                  <MissionCard title="10時間以上作業しよう" progress={100} />
+                  <MissionCard
+                    title="10時間以上作業しよう"
+                    progress={100}
+                    reward="500Exp"
+                  />
                 </div>
                 <div className="mb-4">
                   <MissionCard
                     title="[朝活イベント] 午前中（AM7:00~AM11:59）の間に1時間以上作業しよう"
                     progress={45}
+                    reward="500Exp"
                   />
                 </div>
                 <div className="mb-4">
                   <MissionCard
                     title="[TypeScript強化月間] TypeScriptを50words以上書こう"
                     progress={75}
+                    reward="500Exp"
                   />
                 </div>
               </div>

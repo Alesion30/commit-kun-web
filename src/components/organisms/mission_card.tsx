@@ -6,12 +6,18 @@ type MissionCardProps = {
   title: string;
   /** 進捗度（0~100） */
   progress: number;
+  /** 達成報酬 */
+  reward: string;
 };
 
 /**
  * Organism: ミッションカード
  */
-export const MissionCard: VFC<MissionCardProps> = ({ title, progress }) => {
+export const MissionCard: VFC<MissionCardProps> = ({
+  title,
+  progress,
+  reward,
+}) => {
   const isDone = progress >= 100;
   return (
     <SimpleCard>
@@ -20,19 +26,40 @@ export const MissionCard: VFC<MissionCardProps> = ({ title, progress }) => {
       </div>
       <div className="flex justify-between">
         <div className="flex-grow">
-          <div className="mx-5 my-3 flex items-center">
-            <p className="flex-none bg-blue-400 text-white rounded-2xl w-20 text-center text-sm py-2">
-              進行状況
-            </p>
-            <div className="mx-3 flex-grow">
-              <ProgressBar percentage={progress} />
+          {/* 進行状況 */}
+          <div className="hidden sm:block">
+            <div className="mx-5 my-3 flex items-center">
+              <p className="flex-none bg-blue-400 text-white rounded-2xl w-20 text-center text-sm py-2">
+                進行状況
+              </p>
+              <div className="mx-3 flex-grow">
+                <ProgressBar percentage={progress} />
+              </div>
             </div>
           </div>
-          <div className="mx-5 my-3 flex items-center">
-            <p className="bg-green-500 text-white rounded-2xl w-20 text-center text-sm py-2">
-              達成報酬
-            </p>
-            <p className="text-md mx-4">経験値500</p>
+          <div className="block sm:hidden">
+            <div className="mx-3 my-3 flex items-center">
+              <p className="flex-none bg-blue-400 text-white rounded-2xl px-4 text-center text-sm py-2">
+                進行状況: {progress}%
+              </p>
+            </div>
+          </div>
+
+          {/* 達成報酬 */}
+          <div className="hidden sm:block">
+            <div className="mx-5 my-3 flex items-center">
+              <p className="bg-green-500 text-white rounded-2xl w-20 text-center text-sm py-2">
+                達成報酬
+              </p>
+              <p className="text-md mx-4">{reward}</p>
+            </div>
+          </div>
+          <div className="block sm:hidden">
+            <div className="mx-3 my-3 flex items-center">
+              <p className="bg-green-500 text-white rounded-2xl px-4 text-center text-sm py-2">
+                達成報酬: {reward}
+              </p>
+            </div>
           </div>
         </div>
         <div className="my-2 mx-5">
