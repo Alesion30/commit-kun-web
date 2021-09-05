@@ -35,13 +35,13 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
     { name: "ホーム", href: "/" },
     { name: "ミッション", href: "/mission" },
     { name: "アクティビティ", href: "/activity" },
-    { name: "フレンド", href: "/friend" },
+    // { name: "フレンド", href: "/friend" },
   ];
 
   // プロフィール ドロップダウン
   const profileNavigations: ProfileDropdownNavigation[] = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "" },
+    // { name: "Your Profile", href: "" },
+    // { name: "Settings", href: "" },
     { name: "Sign out", onClick: onClickSignOut },
   ];
 

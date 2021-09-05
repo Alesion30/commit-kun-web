@@ -49,8 +49,8 @@ const Activity: NextPage = () => {
   return (
     <MainLayout>
       <TailwindUIModal open={open} onClose={onClickClose}>
-        <div className="sm:px-10 sm:py-6 p-2 text-center text-gray-700">
-          <h2 className="text-2xl font-medium mb-2">{dateStr}</h2>
+        <div className="sm:px-10 sm:py-6 px-2 py-4 text-center text-gray-700">
+          <h2 className="text-lg sm:text-2xl font-medium mb-2">{dateStr}</h2>
           <ChartJSDailyBar
             title={dailyBarContent.title}
             data={dailyBarContent.data}
@@ -59,7 +59,7 @@ const Activity: NextPage = () => {
         </div>
       </TailwindUIModal>
 
-      <div className="container mx-auto sm:py-10 py-2 text-center">
+      <div className="container xl:w-4/5 w-full mx-auto sm:pt-4 sm:pb-20 px-2 pt-2 pb-10 text-center">
         <div className="flex flex-wrap justify-center mb-2">
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
@@ -84,6 +84,7 @@ const Activity: NextPage = () => {
               label="TOTAL"
               value="2500"
               preValue="1600"
+              unit="Exp"
               color="bg-gray-400"
               onClick={() => {
                 setDailyBarContent({

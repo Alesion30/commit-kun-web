@@ -1,5 +1,6 @@
 import { ReactNode, VFC, useEffect, useState } from "react";
-import { User, onAuthStateChanged } from "~/plugins/firebase";
+import { getGitHubToken, removeGitHubToken } from "~/data/cookie";
+import { User, onAuthStateChanged, signOut } from "~/plugins/firebase";
 import { AuthContext } from "./context";
 
 type AuthProviderProps = {
@@ -10,6 +11,7 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [authUser, setAuthUser] = useState<User>(null);
+  const [githubToken, setGithubToken] = useState<String>(null);
 
   useEffect(() => {
     const initializeAuth = async (): Promise<void> => {
@@ -23,12 +25,16 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
         // 認証状態をセット
         if (user != null) {
           setAuthenticated(true);
+          const token = getGitHubToken();
+          console.log(token);
+          setGithubToken(token);
         } else {
           setAuthenticated(false);
+          removeGitHubToken();
         }
 
         // ロードを終了
-        setLoading(false);
+        setTimeout(() => setLoading(false), 1000);
       });
     };
     initializeAuth();
@@ -40,6 +46,8 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
         isAuthenticated,
         authUser,
         isLoading,
+        githubToken,
+        setGithubToken,
       }}
     >
       {children}

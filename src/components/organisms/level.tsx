@@ -22,7 +22,7 @@ export const Level: VFC<LevelProps> = ({ level, progress }) => {
           <img
             className="block h-full w-full rounded-full"
             style={{ padding: "14%" }}
-            src={authUser.photoURL}
+            src={authUser?.photoURL}
             alt="Workflow"
           />
         </div>
