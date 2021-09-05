@@ -34,9 +34,9 @@ export const Ranking: VFC<RankingProps> = ({}) => {
       style={{ margin: "5%" }}
     >
       <div>
-        <p className="text-3xl text-center font-medium">Ranking</p>
+        <p className="text-3xl m-5 text-center font-medium">Ranking</p>
       </div>
-      <div className="h-2/3 m-2">
+      <div className="flex-1 m-2">
         <CardTable
           title1="Rank"
           title2="Name"
