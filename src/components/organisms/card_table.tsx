@@ -5,7 +5,7 @@ type CardTableProps = {
   title1: string;
   title2: string;
   title3: string;
-  items: { name: string; level: number }[];
+  items: { name: string; value: number }[];
   /** tailwindの色を指定(eg. red-400) */
   color?: string;
 };
@@ -43,10 +43,10 @@ export const CardTable: VFC<CardTableProps> = ({
           style={{ height: "50vh" }}
         >
           {items.map((item, index) => (
-            <tr className="flex w-full mb-4" key={item.name}>
+            <tr className="flex w-full mb-4" key={item.name + index}>
               <td className="text-center p-4 w-1/6">{index + 1}</td>
               <td className="text-center p-4 w-3/6">{item.name}</td>
-              <td className="text-center p-4 w-2/6">{item.level}</td>
+              <td className="text-center p-4 w-2/6">{item.value}</td>
             </tr>
           ))}
         </tbody>
