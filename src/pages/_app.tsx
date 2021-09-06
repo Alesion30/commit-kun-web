@@ -4,13 +4,16 @@ import "tailwindcss/tailwind.css";
 import { AuthProvider } from "~/providers/auth";
 import { LoadingProvider } from "~/providers/loading";
 import { MissionProvider } from "~/providers/mission";
+import { ActivityProvider } from "~/providers/activity";
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
       <LoadingProvider>
         <MissionProvider>
-          <Component {...pageProps} />
+          <ActivityProvider>
+            <Component {...pageProps} />
+          </ActivityProvider>
         </MissionProvider>
       </LoadingProvider>
     </AuthProvider>
