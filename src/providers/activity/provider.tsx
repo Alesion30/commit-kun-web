@@ -4,8 +4,10 @@ import { useAuth } from "~/hooks";
 import {
   CommitResponse,
   getCommit,
+  getPrComment,
   getTypeNum,
   getWorkTime,
+  PrCommentResponse,
   TypeNumResponse,
   WorkTimeResponse,
 } from "~/data/remote/activity";
@@ -21,6 +23,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
   const [workTime, setWorkTime] = useState<WorkTimeResponse>(null);
   const [commit, setCommit] = useState<CommitResponse>(null);
   const [typeNum, setTypeNum] = useState<TypeNumResponse>(null);
+  const [prComment, setPrComment] = useState<PrCommentResponse>(null);
 
   useEffect(() => {
     const init = async (): Promise<void> => {
@@ -36,6 +39,10 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         // コード量
         const typeNum = (await getTypeNum(token)).data;
         setTypeNum(typeNum);
+
+        // PRレビューのコメント数
+        const prComment = (await getPrComment(token)).data;
+        setPrComment(prComment);
       }
     };
     init();
@@ -47,6 +54,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         workTime,
         commit,
         typeNum,
+        prComment,
       }}
     >
       {children}

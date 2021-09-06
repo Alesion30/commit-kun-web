@@ -79,3 +79,21 @@ export const getTypeNum = (token: string) =>
   axios(token).get<TypeNumResponse>("/user/hours/type", {
     params: { timeDifference: 9 },
   });
+
+// ****************************************************************
+// PRコメント数
+// ****************************************************************
+
+export type PrCommentResponse = {
+  prCommentNum: number;
+  hours: {
+    hour: Hour;
+    prComment: number;
+  }[];
+};
+
+/** 1日のPRコメント数を取得 */
+export const getPrComment = (token: string) =>
+  axios(token).get<PrCommentResponse>("/user/hours/pr", {
+    params: { timeDifference: 9 },
+  });

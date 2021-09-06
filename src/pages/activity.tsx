@@ -156,12 +156,12 @@ const Activity: NextPage = () => {
             <StatusCard
               title="PRコメント数"
               label={dateStr}
-              value="4"
+              value={`${activity.prComment.prCommentNum}`}
               color="bg-yellow-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "PRコメント数",
-                  data: mockData,
+                  data: activity.prComment.hours.map((hour) => hour.prComment),
                   color: "yellow",
                 });
                 onClickOpen();
