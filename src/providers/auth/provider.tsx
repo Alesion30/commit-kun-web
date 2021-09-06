@@ -1,5 +1,6 @@
 import { ReactNode, VFC, useEffect, useState } from "react";
 import { getGitHubToken, removeGitHubToken } from "~/data/cookie";
+import { fetchGitHubInfo } from "~/data/remote/user";
 import { User, onAuthStateChanged } from "~/plugins/firebase";
 import { AuthContext } from "./context";
 
@@ -32,6 +33,10 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
           // GitHubAPIのトークンをCookieから取得
           const token = getGitHubToken();
           setGithubToken(token);
+
+          // GitHubの情報をDBに反映
+          // TODO: 400エラーが返るので, とりあえずコメントアウト
+          // fetchGitHubInfo(idToken);
 
           setAuthenticated(true);
         } else {

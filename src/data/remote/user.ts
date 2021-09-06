@@ -29,3 +29,7 @@ export const createUser = (req: CreateUserRequest, token: string) =>
 /** ユーザー情報更新 */
 export const updateUser = (req: CreateUserRequest, token: string) =>
   axios(token).patch<void>("/user", req);
+
+/** GitHubの情報（コミット数・PRレビューコメント数）をDBに反映 */
+export const fetchGitHubInfo = (token: string) =>
+  axios(token).get<void>("/user/git");
