@@ -9,16 +9,11 @@ import { withAuth } from "~/hocs";
 import { SimpleCard } from "~/components/organisms/card";
 import { MissionCard } from "~/components/organisms/mission_card";
 import { Tabs } from "~/components/molecules/tabs";
-import { useAuth } from "~/hooks";
-import {
-  getDailyMission,
-  getNormalMission,
-  MissionResponse,
-} from "~/data/remote/mission";
+import { MissionResponse } from "~/data/remote/mission";
+import useMission from "~/hooks/mission";
 
 const Mission: NextPage = () => {
-  const auth = useAuth();
-  const token = auth.fbIdToken;
+  const mission = useMission();
   const [activeIndex, setActiveIndex] = useState<number>(0); // 0: daily, 1: normal
   const TABS = ["デイリー", "ノーマル"];
 
@@ -31,21 +26,19 @@ const Mission: NextPage = () => {
       try {
         // デイリーミッション取得
         if (activeIndex === 0) {
-          const dailyMissions = (await getDailyMission(token)).data;
-          setMissions(dailyMissions);
+          setMissions(mission.daily);
         }
 
         // ノーマルミッション取得
         if (activeIndex === 1) {
-          const normalMissions = (await getNormalMission(token)).data;
-          setMissions(normalMissions);
+          setMissions(mission.normal);
         }
       } catch (err) {
         console.error(err);
       }
     };
     run();
-  }, [token, activeIndex]);
+  }, [activeIndex, mission.daily, mission.normal]);
 
   return (
     <MainLayout>
