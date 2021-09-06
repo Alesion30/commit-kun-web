@@ -26,6 +26,10 @@ export type Hour =
   | 22
   | 23;
 
+// ****************************************************************
+// 作業時間
+// ****************************************************************
+
 export type WorkTimeResponse = {
   workTime: number;
   hours: {
@@ -37,5 +41,23 @@ export type WorkTimeResponse = {
 /** 1日の作業時間を取得 */
 export const getWorkTime = (token: string) =>
   axios(token).get<WorkTimeResponse>("/user/hours/work", {
+    params: { timeDifference: 9 },
+  });
+
+// ****************************************************************
+// コミット数
+// ****************************************************************
+
+export type CommitResponse = {
+  commitNum: number;
+  hours: {
+    hour: Hour;
+    commit: number;
+  }[];
+};
+
+/** 1日のコミット数を取得 */
+export const getCommit = (token: string) =>
+  axios(token).get<CommitResponse>("/user/hours/commit", {
     params: { timeDifference: 9 },
   });

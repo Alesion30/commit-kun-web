@@ -123,12 +123,12 @@ const Activity: NextPage = () => {
             <StatusCard
               title="コミット数"
               label={dateStr}
-              value="15"
+              value={`${activity.commit.commitNum}`}
               color="bg-red-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コミット数",
-                  data: mockData,
+                  data: activity.commit.hours.map((hour) => hour.commit),
                   color: "red",
                 });
                 onClickOpen();
