@@ -19,6 +19,7 @@ import useActivity from "~/hooks/activity";
 const Activity: NextPage = () => {
   // アクティビティ情報
   const activity = useActivity();
+  const { workTime, commit, typeNum, prComment } = activity;
 
   // カレンダー年月
   const [startMonthDate, setStartMonthDate] = useState<Dayjs>(
@@ -106,13 +107,15 @@ const Activity: NextPage = () => {
             <StatusCard
               title="作業時間"
               label={dateStr}
-              value={`${activity.workTime.workTime}`}
+              value={`${workTime?.workTime ?? "-"}`}
               unit="hour"
               color="bg-blue-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "作業時間",
-                  data: activity.workTime.hours.map((hour) => hour.workTime),
+                  data: workTime
+                    ? workTime.hours.map((hour) => hour.workTime)
+                    : [],
                   color: "blue",
                 });
                 onClickOpen();
@@ -123,12 +126,12 @@ const Activity: NextPage = () => {
             <StatusCard
               title="コミット数"
               label={dateStr}
-              value={`${activity.commit.commitNum}`}
+              value={`${commit?.commitNum ?? "-"}`}
               color="bg-red-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コミット数",
-                  data: activity.commit.hours.map((hour) => hour.commit),
+                  data: commit ? commit.hours.map((hour) => hour.commit) : [],
                   color: "red",
                 });
                 onClickOpen();
@@ -139,13 +142,15 @@ const Activity: NextPage = () => {
             <StatusCard
               title="コード量"
               label={dateStr}
-              value={`${activity.typeNum.typeNum}`}
+              value={`${typeNum?.typeNum ?? "-"}`}
               unit="words"
               color="bg-green-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コード量",
-                  data: activity.typeNum.hours.map((hour) => hour.typeNum),
+                  data: typeNum
+                    ? typeNum.hours.map((hour) => hour.typeNum)
+                    : [],
                   color: "green",
                 });
                 onClickOpen();
@@ -156,12 +161,14 @@ const Activity: NextPage = () => {
             <StatusCard
               title="PRコメント数"
               label={dateStr}
-              value={`${activity.prComment.prCommentNum}`}
+              value={`${prComment?.prCommentNum ?? "-"}`}
               color="bg-yellow-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "PRコメント数",
-                  data: activity.prComment.hours.map((hour) => hour.prComment),
+                  data: prComment
+                    ? prComment.hours.map((hour) => hour.prComment)
+                    : [],
                   color: "yellow",
                 });
                 onClickOpen();
