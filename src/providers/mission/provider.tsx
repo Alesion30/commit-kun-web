@@ -15,8 +15,8 @@ export const MissionProvider: VFC<MissionProviderProps> = ({ children }) => {
   const auth = useAuth();
   const token = auth.fbIdToken;
 
-  const [dailyMissions, setDailyMissions] = useState<MissionResponse[]>([]);
-  const [normalMissions, setNormalMissions] = useState<MissionResponse[]>([]);
+  const [dailyMissions, setDailyMissions] = useState<MissionResponse>([]);
+  const [normalMissions, setNormalMissions] = useState<MissionResponse>([]);
 
   useEffect(() => {
     const init = async (): Promise<void> => {

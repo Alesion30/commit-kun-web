@@ -18,7 +18,7 @@ const Mission: NextPage = () => {
   const TABS = ["デイリー", "ノーマル"];
 
   // ミッション
-  const [missions, setMissions] = useState<MissionResponse[]>([]);
+  const [missions, setMissions] = useState<MissionResponse>([]);
 
   useEffect(() => {
     const run = async () => {
