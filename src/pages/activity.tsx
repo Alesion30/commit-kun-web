@@ -14,8 +14,12 @@ import {
   ChartJSDailyBar,
   ChartJSDailyBarProps,
 } from "~/components/organisms/chart";
+import useActivity from "~/hooks/activity";
 
 const Activity: NextPage = () => {
+  // アクティビティ情報
+  const activity = useActivity();
+
   // カレンダー年月
   const [startMonthDate, setStartMonthDate] = useState<Dayjs>(
     dayjs().startOf("M")
@@ -102,14 +106,13 @@ const Activity: NextPage = () => {
             <StatusCard
               title="作業時間"
               label={dateStr}
-              value="2.5"
-              preValue="1.0"
+              value={`${activity.workTime.workTime}`}
               unit="hour"
               color="bg-blue-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "作業時間",
-                  data: mockData,
+                  data: activity.workTime.hours.map((hour) => hour.workTime),
                   color: "blue",
                 });
                 onClickOpen();
