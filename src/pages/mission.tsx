@@ -27,6 +27,7 @@ const Mission: NextPage = () => {
 
   useEffect(() => {
     const run = async () => {
+      setMissions([]);
       try {
         // デイリーミッション取得
         if (activeIndex === 0) {
@@ -60,7 +61,10 @@ const Mission: NextPage = () => {
               <div className="sm:mx-10 mx-1 sm:my-5 my-2 lg:w-4/5">
                 {missions.map((mission, index) => {
                   return (
-                    <div key={`mission_${index}`} className="mb-4">
+                    <div
+                      key={`mission_${index}`}
+                      className="mb-4 animate-fade-in-up"
+                    >
                       <MissionCard
                         title={mission.mission}
                         progress={mission.clearRate}
