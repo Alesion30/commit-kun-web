@@ -4,7 +4,9 @@ import { useAuth } from "~/hooks";
 import {
   CommitResponse,
   getCommit,
+  getTypeNum,
   getWorkTime,
+  TypeNumResponse,
   WorkTimeResponse,
 } from "~/data/remote/activity";
 
@@ -18,6 +20,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
 
   const [workTime, setWorkTime] = useState<WorkTimeResponse>(null);
   const [commit, setCommit] = useState<CommitResponse>(null);
+  const [typeNum, setTypeNum] = useState<TypeNumResponse>(null);
 
   useEffect(() => {
     const init = async (): Promise<void> => {
@@ -29,6 +32,10 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         // コミット数
         const commit = (await getCommit(token)).data;
         setCommit(commit);
+
+        // コード量
+        const typeNum = (await getTypeNum(token)).data;
+        setTypeNum(typeNum);
       }
     };
     init();
@@ -39,6 +46,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
       value={{
         workTime,
         commit,
+        typeNum,
       }}
     >
       {children}

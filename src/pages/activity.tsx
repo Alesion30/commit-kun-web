@@ -139,13 +139,13 @@ const Activity: NextPage = () => {
             <StatusCard
               title="コード量"
               label={dateStr}
-              value="592"
+              value={`${activity.typeNum.typeNum}`}
               unit="words"
               color="bg-green-400"
               onClick={() => {
                 setDailyBarContent({
                   title: "コード量",
-                  data: mockData,
+                  data: activity.typeNum.hours.map((hour) => hour.typeNum),
                   color: "green",
                 });
                 onClickOpen();

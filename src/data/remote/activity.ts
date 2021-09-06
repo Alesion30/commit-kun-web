@@ -61,3 +61,21 @@ export const getCommit = (token: string) =>
   axios(token).get<CommitResponse>("/user/hours/commit", {
     params: { timeDifference: 9 },
   });
+
+// ****************************************************************
+// コード量
+// ****************************************************************
+
+export type TypeNumResponse = {
+  typeNum: number;
+  hours: {
+    hour: Hour;
+    typeNum: number;
+  }[];
+};
+
+/** 1日のコード量を取得 */
+export const getTypeNum = (token: string) =>
+  axios(token).get<TypeNumResponse>("/user/hours/type", {
+    params: { timeDifference: 9 },
+  });
