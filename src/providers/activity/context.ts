@@ -11,6 +11,9 @@ export type ActivityContextProps = {
   isLoading: boolean;
   date: Dayjs;
   setDate: React.Dispatch<React.SetStateAction<Dayjs>>;
+  startMonthDate: Dayjs;
+  onClickPrevMonth: () => void;
+  onClickNextMonth: () => void;
   workTime: WorkTimeResponse;
   commit: CommitResponse;
   typeNum: TypeNumResponse;
@@ -22,6 +25,9 @@ export const ActivityContext = createContext<ActivityContextProps>({
   isLoading: false,
   date: null,
   setDate: () => {},
+  startMonthDate: null,
+  onClickPrevMonth: () => {},
+  onClickNextMonth: () => {},
   workTime: null,
   commit: null,
   typeNum: null,

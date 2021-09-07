@@ -3,7 +3,9 @@ import { ActivityContext } from "./context";
 import { useAuth } from "~/hooks";
 import {
   CommitResponse,
+  ExpResponse,
   getCommit,
+  getDailyExps,
   getPrComment,
   getTypeNum,
   getWorkTime,
@@ -24,10 +26,26 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [date, setDate] = useState<Dayjs>(dayjs());
 
+  // カレンダー年月
+  const [startMonthDate, setStartMonthDate] = useState<Dayjs>(
+    dayjs().startOf("M")
+  );
+  const onClickPrevMonth = () => {
+    const prevMonthDate = startMonthDate.subtract(1, "M");
+    setStartMonthDate(prevMonthDate);
+  };
+  const onClickNextMonth = () => {
+    const nextMonthDate = startMonthDate.add(1, "M");
+    setStartMonthDate(nextMonthDate);
+  };
+
   const [workTime, setWorkTime] = useState<WorkTimeResponse>(null);
   const [commit, setCommit] = useState<CommitResponse>(null);
   const [typeNum, setTypeNum] = useState<TypeNumResponse>(null);
   const [prComment, setPrComment] = useState<PrCommentResponse>(null);
+
+  // 経験値
+  const [exps, setExps] = useState<ExpResponse>(null);
 
   // データ再取得
   const fetchData = useCallback(
@@ -77,12 +95,39 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
     fetchData(date);
   }, [fetchData, date]);
 
+  // 月の経験値データを再取得
+  const fetchExpsData = useCallback(
+    async (year: number, month: number) => {
+      setExps([]);
+
+      if (token) {
+        try {
+          const exps = (await getDailyExps(token, year, month)).data;
+          setExps(exps);
+          console.log(exps);
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        console.error("requried firebase token");
+      }
+    },
+    [token]
+  );
+
+  useEffect(() => {
+    fetchExpsData(startMonthDate.year(), startMonthDate.month());
+  }, [fetchExpsData, startMonthDate]);
+
   return (
     <ActivityContext.Provider
       value={{
         isLoading,
         date,
         setDate,
+        startMonthDate,
+        onClickPrevMonth,
+        onClickNextMonth,
         workTime,
         commit,
         typeNum,

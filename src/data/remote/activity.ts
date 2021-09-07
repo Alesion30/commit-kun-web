@@ -1,5 +1,5 @@
 import axios from "~/plugins/axios";
-import { Dayjs } from "~/plugins/dayjs";
+import dayjs, { Dayjs } from "~/plugins/dayjs";
 
 export type Hour =
   | 0
@@ -110,3 +110,26 @@ export const getPrComment = (token: string, date: Dayjs) =>
       date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
     },
   });
+
+// ****************************************************************
+// 対象年月の日毎の経験値を取得
+// ****************************************************************
+
+export type ExpResponse = {
+  date: Date;
+  experiencePoint: number; // 獲得経験値
+}[];
+
+/** 対象年月の日毎の経験値を取得 */
+export const getDailyExps = (token: string, year: number, month: number) => {
+  const date = dayjs().hour(year).month(month);
+  const startDate = date.startOf("month");
+  const endDate = date.endOf("month");
+  return axios(token).get<ExpResponse>("/user/exp/days", {
+    params: {
+      timeDifference: 9,
+      start: startDate.format("YYYY-MM-DDTHH:mm:ss"),
+      end: endDate.format("YYYY-MM-DDTHH:mm:ss"),
+    },
+  });
+};

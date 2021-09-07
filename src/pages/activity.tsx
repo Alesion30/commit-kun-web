@@ -22,17 +22,7 @@ const Activity: NextPage = () => {
   const { workTime, commit, typeNum, prComment } = activity;
 
   // カレンダー年月
-  const [startMonthDate, setStartMonthDate] = useState<Dayjs>(
-    dayjs().startOf("M")
-  );
-  const onClickPrevMonth = () => {
-    const prevMonthDate = startMonthDate.subtract(1, "M");
-    setStartMonthDate(prevMonthDate);
-  };
-  const onClickNextMonth = () => {
-    const nextMonthDate = startMonthDate.add(1, "M");
-    setStartMonthDate(nextMonthDate);
-  };
+  const { startMonthDate, onClickPrevMonth, onClickNextMonth } = activity;
 
   // 選択されている日付
   const { date, setDate } = activity;
@@ -49,7 +39,6 @@ const Activity: NextPage = () => {
     data: [],
     color: "blue",
   });
-  const mockData = [...Array(24)].map((_, __) => Math.random() * 100);
 
   return (
     <MainLayout>
