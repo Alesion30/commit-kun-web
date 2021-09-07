@@ -3,7 +3,7 @@
 // ********************************************************************************
 
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs, { Dayjs } from "~/plugins/dayjs";
 import { MainLayout } from "~/components/templates/main";
 import { Calendar } from "~/components/organisms/calendar";
@@ -35,7 +35,7 @@ const Activity: NextPage = () => {
   };
 
   // 選択されている日付
-  const [date, setDate] = useState<Dayjs>(dayjs());
+  const { date, setDate } = activity;
   const dateStr = date.format("YYYY年MM月DD日");
 
   // モーダル
@@ -73,14 +73,14 @@ const Activity: NextPage = () => {
               value="25"
               preValue="16"
               color="bg-pink-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "レベル",
-                  data: mockData,
-                  color: "pink",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "レベル",
+              //     data: mockData,
+              //     color: "pink",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -91,14 +91,14 @@ const Activity: NextPage = () => {
               preValue="1600"
               unit="Exp"
               color="bg-gray-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "経験値",
-                  data: mockData,
-                  color: "gray",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "経験値",
+              //     data: mockData,
+              //     color: "gray",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
         </div>
@@ -181,7 +181,9 @@ const Activity: NextPage = () => {
           onClickPrevMonth={onClickPrevMonth}
           onClickNextMonth={onClickNextMonth}
           selectedDate={date}
-          onClick={(d) => setDate(d)}
+          onClick={(d) => {
+            if (activity.isLoading === false) setDate(d);
+          }}
         />
       </div>
     </MainLayout>
