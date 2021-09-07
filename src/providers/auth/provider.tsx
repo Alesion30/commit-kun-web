@@ -35,8 +35,7 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
           setGithubToken(token);
 
           // GitHubの情報をDBに反映
-          // TODO: 400エラーが返るので, とりあえずコメントアウト
-          // fetchGitHubInfo(idToken);
+          fetchGitHubInfo(idToken);
 
           setAuthenticated(true);
         } else {

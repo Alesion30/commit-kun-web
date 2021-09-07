@@ -32,4 +32,6 @@ export const updateUser = (req: CreateUserRequest, token: string) =>
 
 /** GitHubの情報（コミット数・PRレビューコメント数）をDBに反映 */
 export const fetchGitHubInfo = (token: string) =>
-  axios(token).get<void>("/user/git");
+  axios(token).get<void>("/user/git", {
+    params: { timeDifference: 9 },
+  });
