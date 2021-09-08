@@ -99,6 +99,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
   const fetchExpsData = useCallback(
     async (year: number, month: number) => {
       if (token) {
+        // TODO: 1ヶ月全てのデータを取るとサーバーが落ちるので、3日ごとで取得。修正必要あり
         try {
           let new_exps: ExpResponse = [];
 
@@ -108,14 +109,13 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
           let date = startDate;
           let predate = startDate;
 
-          console.log(exps);
-          const check = exps.find(
-            (value) =>
-              dayjs(value.date).year() === year &&
-              dayjs(value.date).month() === month
-          );
-          console.log(check);
-          if (check === undefined) {
+          const isExist =
+            exps.find(
+              (value) =>
+                dayjs(value.date).year() === year &&
+                dayjs(value.date).month() === month
+            ) !== undefined;
+          if (!isExist) {
             try {
               while (date < endDate && date <= dayjs()) {
                 date = date.add(3, "d");
@@ -129,7 +129,6 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
             }
 
             const concat_exps = exps.concat(new_exps);
-            console.log(concat_exps);
             setExps(concat_exps);
           }
         } catch (e) {
