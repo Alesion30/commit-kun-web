@@ -3,10 +3,9 @@
 // ********************************************************************************
 
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
-import dayjs, { Dayjs } from "~/plugins/dayjs";
+import { useState } from "react";
 import { MainLayout } from "~/components/templates/main";
-import { Calendar } from "~/components/organisms/calendar";
+import { Calendar, CalendarCellStyle } from "~/components/organisms/calendar";
 import { withAuth } from "~/hocs";
 import { StatusCard } from "~/components/organisms/status_card";
 import { TailwindUIModal } from "~/components/organisms/modal";
@@ -15,6 +14,7 @@ import {
   ChartJSDailyBarProps,
 } from "~/components/organisms/chart";
 import useActivity from "~/hooks/activity";
+import dayjs from "~/plugins/dayjs";
 
 const Activity: NextPage = () => {
   // アクティビティ情報
@@ -38,6 +38,23 @@ const Activity: NextPage = () => {
     title: "",
     data: [],
     color: "blue",
+  });
+
+  // カレンダー 経験値に応じて色付け
+  const { exps } = activity;
+  const calendarCellStyles: CalendarCellStyle[] = exps.map((exp) => {
+    // 背景色
+    let bgColor = "bg-white";
+    if (exp.experiencePoint > 1000) {
+      bgColor = "bg-green-500";
+    } else if (exp.experiencePoint > 0) {
+      bgColor = "bg-green-100";
+    }
+    const calendarCellStyle: CalendarCellStyle = {
+      date: dayjs(exp.date),
+      bgColor: bgColor,
+    };
+    return calendarCellStyle;
   });
 
   return (
@@ -173,6 +190,7 @@ const Activity: NextPage = () => {
           onClick={(d) => {
             if (activity.isLoading === false) setDate(d);
           }}
+          calendarCellStyles={calendarCellStyles}
         />
       </div>
     </MainLayout>

@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import {
   CommitResponse,
+  ExpResponse,
   PrCommentResponse,
   TypeNumResponse,
   WorkTimeResponse,
@@ -18,7 +19,7 @@ export type ActivityContextProps = {
   commit: CommitResponse;
   typeNum: TypeNumResponse;
   prComment: PrCommentResponse;
-  fetchData: (date: Dayjs) => void;
+  exps: ExpResponse;
 };
 
 export const ActivityContext = createContext<ActivityContextProps>({
@@ -32,5 +33,5 @@ export const ActivityContext = createContext<ActivityContextProps>({
   commit: null,
   typeNum: null,
   prComment: null,
-  fetchData: () => {},
+  exps: [],
 });

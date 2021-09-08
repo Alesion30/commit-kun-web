@@ -11,6 +11,8 @@ type CalendarCellProps = {
   onClick?: () => void;
   /** disabled */
   disabled?: boolean;
+  /** 背景色 */
+  bgColor?: string;
 
   /** ボーダーTOP */
   top?: boolean;
@@ -30,6 +32,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
   active,
   onClick,
   disabled,
+  bgColor,
   top,
   right,
   bottom,
@@ -50,6 +53,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
           ? "cursor-pointer hover:bg-blue-100 transition ease-in-out duration-500"
           : "cursor-default",
         disabled ? "bg-gray-100" : "",
+        bgColor && !disabled ? bgColor : "",
         top ? "border-t" : "",
         right ? "border-r" : "",
         bottom ? "border-b" : "",

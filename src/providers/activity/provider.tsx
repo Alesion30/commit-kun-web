@@ -45,7 +45,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
   const [prComment, setPrComment] = useState<PrCommentResponse>(null);
 
   // 経験値
-  const [exps, setExps] = useState<ExpResponse>(null);
+  const [exps, setExps] = useState<ExpResponse>([]);
 
   // データ再取得
   const fetchData = useCallback(
@@ -98,13 +98,40 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
   // 月の経験値データを再取得
   const fetchExpsData = useCallback(
     async (year: number, month: number) => {
-      setExps([]);
-
       if (token) {
         try {
-          const exps = (await getDailyExps(token, year, month)).data;
-          setExps(exps);
+          let new_exps: ExpResponse = [];
+
+          const startDate = dayjs().year(year).month(month).startOf("month");
+          const endDate = dayjs().year(year).month(month).endOf("month");
+
+          let date = startDate;
+          let predate = startDate;
+
           console.log(exps);
+          const check = exps.find(
+            (value) =>
+              dayjs(value.date).year() === year &&
+              dayjs(value.date).month() === month
+          );
+          console.log(check);
+          if (check === undefined) {
+            try {
+              while (date < endDate && date <= dayjs()) {
+                date = date.add(3, "d");
+                const new_exps_part =
+                  (await getDailyExps(token, predate, date)).data ?? [];
+                new_exps = new_exps.concat(new_exps_part);
+                predate = date;
+              }
+            } catch (err) {
+              console.error(err);
+            }
+
+            const concat_exps = exps.concat(new_exps);
+            console.log(concat_exps);
+            setExps(concat_exps);
+          }
         } catch (e) {
           console.error(e);
         }
@@ -112,12 +139,13 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         console.error("requried firebase token");
       }
     },
-    [token]
+    [token, exps]
   );
 
   useEffect(() => {
     fetchExpsData(startMonthDate.year(), startMonthDate.month());
-  }, [fetchExpsData, startMonthDate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, startMonthDate]);
 
   return (
     <ActivityContext.Provider
@@ -132,7 +160,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         commit,
         typeNum,
         prComment,
-        fetchData,
+        exps,
       }}
     >
       {children}
