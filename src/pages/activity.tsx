@@ -4,9 +4,8 @@
 
 import { NextPage } from "next";
 import { useState } from "react";
-import dayjs, { Dayjs } from "~/plugins/dayjs";
 import { MainLayout } from "~/components/templates/main";
-import { Calendar } from "~/components/organisms/calendar";
+import { Calendar, CalendarCellStyle } from "~/components/organisms/calendar";
 import { withAuth } from "~/hocs";
 import { StatusCard } from "~/components/organisms/status_card";
 import { TailwindUIModal } from "~/components/organisms/modal";
@@ -15,6 +14,7 @@ import {
   ChartJSDailyBarProps,
 } from "~/components/organisms/chart";
 import useActivity from "~/hooks/activity";
+import dayjs from "~/plugins/dayjs";
 
 const Activity: NextPage = () => {
   // アクティビティ情報
@@ -22,20 +22,10 @@ const Activity: NextPage = () => {
   const { workTime, commit, typeNum, prComment } = activity;
 
   // カレンダー年月
-  const [startMonthDate, setStartMonthDate] = useState<Dayjs>(
-    dayjs().startOf("M")
-  );
-  const onClickPrevMonth = () => {
-    const prevMonthDate = startMonthDate.subtract(1, "M");
-    setStartMonthDate(prevMonthDate);
-  };
-  const onClickNextMonth = () => {
-    const nextMonthDate = startMonthDate.add(1, "M");
-    setStartMonthDate(nextMonthDate);
-  };
+  const { startMonthDate, onClickPrevMonth, onClickNextMonth } = activity;
 
   // 選択されている日付
-  const [date, setDate] = useState<Dayjs>(dayjs());
+  const { date, setDate } = activity;
   const dateStr = date.format("YYYY年MM月DD日");
 
   // モーダル
@@ -49,7 +39,23 @@ const Activity: NextPage = () => {
     data: [],
     color: "blue",
   });
-  const mockData = [...Array(24)].map((_, __) => Math.random() * 100);
+
+  // カレンダー 経験値に応じて色付け
+  const { exps } = activity;
+  const calendarCellStyles: CalendarCellStyle[] = exps.map((exp) => {
+    // 背景色
+    let bgColor = "bg-white";
+    if (exp.experiencePoint > 1000) {
+      bgColor = "bg-green-500";
+    } else if (exp.experiencePoint > 0) {
+      bgColor = "bg-green-100";
+    }
+    const calendarCellStyle: CalendarCellStyle = {
+      date: dayjs(exp.date),
+      bgColor: bgColor,
+    };
+    return calendarCellStyle;
+  });
 
   return (
     <MainLayout>
@@ -73,14 +79,14 @@ const Activity: NextPage = () => {
               value="25"
               preValue="16"
               color="bg-pink-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "レベル",
-                  data: mockData,
-                  color: "pink",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "レベル",
+              //     data: mockData,
+              //     color: "pink",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -91,14 +97,14 @@ const Activity: NextPage = () => {
               preValue="1600"
               unit="Exp"
               color="bg-gray-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "経験値",
-                  data: mockData,
-                  color: "gray",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "経験値",
+              //     data: mockData,
+              //     color: "gray",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
         </div>
@@ -181,7 +187,10 @@ const Activity: NextPage = () => {
           onClickPrevMonth={onClickPrevMonth}
           onClickNextMonth={onClickNextMonth}
           selectedDate={date}
-          onClick={(d) => setDate(d)}
+          onClick={(d) => {
+            if (activity.isLoading === false) setDate(d);
+          }}
+          calendarCellStyles={calendarCellStyles}
         />
       </div>
     </MainLayout>

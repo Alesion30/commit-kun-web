@@ -4,6 +4,11 @@ import { CalendarDayColumn } from "~/components/molecules/calendar_day_column";
 import { CalendarCell } from "~/components/atoms/calendar_cell";
 import dayjs, { Dayjs } from "~/plugins/dayjs";
 
+export type CalendarCellStyle = {
+  date: Dayjs;
+  bgColor: string;
+};
+
 type CalendarProps = {
   /** 月初め */
   startMonthDate: Dayjs;
@@ -15,6 +20,8 @@ type CalendarProps = {
   selectedDate: Dayjs;
   /** 日付をクリック */
   onClick?: (date: Dayjs) => void;
+  /** カレンダーセル 色 */
+  calendarCellStyles?: CalendarCellStyle[];
 };
 
 /**
@@ -28,6 +35,7 @@ export const Calendar: VFC<CalendarProps> = ({
   onClickNextMonth,
   selectedDate,
   onClick,
+  calendarCellStyles,
 }) => {
   const now = dayjs();
   const dates = new Array<Dayjs | null>(startMonthDate.day()).fill(null);
@@ -54,6 +62,11 @@ export const Calendar: VFC<CalendarProps> = ({
         {dates.map((date, index) => {
           // アクティブかどうか
           const active = selectedDate.startOf("d").diff(date, "d") === 0;
+
+          // セルのスタイル
+          const bgColor = (calendarCellStyles ?? []).find(
+            (item) => item.date.startOf("d").diff(date, "d") === 0
+          )?.bgColor;
 
           // disabledかどうか（未来の日付は選択できないようにする）
           const disabled = date > now;
@@ -83,6 +96,7 @@ export const Calendar: VFC<CalendarProps> = ({
               top={top}
               right={right}
               bottom={bottom}
+              bgColor={bgColor}
             />
           );
         })}

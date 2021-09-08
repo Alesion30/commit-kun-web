@@ -1,4 +1,5 @@
 import axios from "~/plugins/axios";
+import dayjs, { Dayjs } from "~/plugins/dayjs";
 
 export type Hour =
   | 0
@@ -39,9 +40,12 @@ export type WorkTimeResponse = {
 };
 
 /** 1日の作業時間を取得 */
-export const getWorkTime = (token: string) =>
+export const getWorkTime = (token: string, date: Dayjs) =>
   axios(token).get<WorkTimeResponse>("/user/hours/work", {
-    params: { timeDifference: 9 },
+    params: {
+      timeDifference: 9,
+      date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
+    },
   });
 
 // ****************************************************************
@@ -57,9 +61,12 @@ export type CommitResponse = {
 };
 
 /** 1日のコミット数を取得 */
-export const getCommit = (token: string) =>
+export const getCommit = (token: string, date: Dayjs) =>
   axios(token).get<CommitResponse>("/user/hours/commit", {
-    params: { timeDifference: 9 },
+    params: {
+      timeDifference: 9,
+      date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
+    },
   });
 
 // ****************************************************************
@@ -75,9 +82,12 @@ export type TypeNumResponse = {
 };
 
 /** 1日のコード量を取得 */
-export const getTypeNum = (token: string) =>
+export const getTypeNum = (token: string, date: Dayjs) =>
   axios(token).get<TypeNumResponse>("/user/hours/type", {
-    params: { timeDifference: 9 },
+    params: {
+      timeDifference: 9,
+      date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
+    },
   });
 
 // ****************************************************************
@@ -93,7 +103,30 @@ export type PrCommentResponse = {
 };
 
 /** 1日のPRコメント数を取得 */
-export const getPrComment = (token: string) =>
+export const getPrComment = (token: string, date: Dayjs) =>
   axios(token).get<PrCommentResponse>("/user/hours/pr", {
-    params: { timeDifference: 9 },
+    params: {
+      timeDifference: 9,
+      date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
+    },
   });
+
+// ****************************************************************
+// 対象年月の日毎の経験値を取得
+// ****************************************************************
+
+export type ExpResponse = {
+  date: Date;
+  experiencePoint: number; // 獲得経験値
+}[];
+
+/** 対象年月の日毎の経験値を取得 */
+export const getDailyExps = (token: string, start: Dayjs, end: Dayjs) => {
+  return axios(token).get<ExpResponse>("/user/exp/days", {
+    params: {
+      timeDifference: 9,
+      start: start.format("YYYY-MM-DDTHH:mm:ss"),
+      end: end.format("YYYY-MM-DDTHH:mm:ss"),
+    },
+  });
+};
