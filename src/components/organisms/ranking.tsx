@@ -38,13 +38,7 @@ export const Ranking: VFC<RankingProps> = ({}) => {
         <p className="text-3xl m-5 text-center font-medium">Ranking</p>
       </div>
       <div className="flex-1 m-2">
-        <CardTable
-          title1="Rank"
-          title2="Name"
-          title3="Level"
-          color="purple-400"
-          items={levels}
-        />
+        <CardTable title1="Rank" title2="Name" title3="Level" items={levels} />
       </div>
     </div>
   );

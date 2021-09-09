@@ -1,5 +1,4 @@
 import { VFC } from "react";
-import { classNames } from "~/utils";
 
 type CardTableProps = {
   title1: string;
@@ -20,18 +19,11 @@ export const CardTable: VFC<CardTableProps> = ({
   title2,
   title3,
   items,
-  color,
 }) => {
-  const bgColorClassName = color ? `bg-${color}` : "bg-red-400";
   return (
     <div className="container shadow-md">
       <table className="text-left w-full">
-        <thead
-          className={classNames(
-            bgColorClassName,
-            "bg-black flex text-white w-full"
-          )}
-        >
+        <thead className="bg-gray-400 bg-black flex text-white w-full">
           <tr className="flex w-full mb-4">
             <th className="text-center p-4 w-1/6">{title1}</th>
             <th className="text-center p-4 w-3/6">{title2}</th>
