@@ -58,7 +58,7 @@ export const StatusCard: VFC<StatusCardProps> = ({
           <span className="text-3xl">
             {preValue}
             <span className="text-xl">{unit}</span>
-            &nbsp;-&gt;&nbsp;
+            <span>&nbsp;-&gt;&nbsp;</span>
           </span>
         )}
         <span className="text-5xl text-red-500">{value ?? "-"}</span>

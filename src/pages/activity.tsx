@@ -55,13 +55,24 @@ const Activity: NextPage = () => {
   // カレンダー 経験値に応じて色付け
   const { exps } = activity;
   const calendarCellStyles: CalendarCellStyle[] = exps.map((exp) => {
+    // 経験値
+    const point = exp.experiencePoint ?? 0;
+
     // 背景色
     let bgColor = "bg-white";
-    if (exp.experiencePoint > 1000) {
+    if (point > 1000) {
       bgColor = "bg-green-500";
-    } else if (exp.experiencePoint > 0) {
+    } else if (point > 800) {
+      bgColor = "bg-green-400";
+    } else if (point > 500) {
+      bgColor = "bg-green-300";
+    } else if (point > 100) {
+      bgColor = "bg-green-200";
+    } else if (point > 0) {
       bgColor = "bg-green-100";
     }
+
+    // データ
     const calendarCellStyle: CalendarCellStyle = {
       date: dayjs(exp.date),
       bgColor: bgColor,

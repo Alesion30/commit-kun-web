@@ -65,7 +65,7 @@ export const MissionCard: VFC<MissionCardProps> = ({
         <div className="my-2 mx-5">
           {isDone && (
             <button className="animate-pulse py-3 px-6 w-32 h-full text-white rounded-lg bg-red-400 hover:bg-red-500 shadow-lg block md:inline-block">
-              受け取る
+              達成済み
             </button>
           )}
           {!isDone && (
