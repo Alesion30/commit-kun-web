@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GithubAuthProvider,
-  signInWithRedirect,
   signInWithPopup,
   signOut as fbSignOut,
   onAuthStateChanged as fbOnAuthStateChanged,
@@ -29,7 +28,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
 
 /** Github プロバイダ */
-const githubProvider = new GithubAuthProvider();
+const githubProvider = new GithubAuthProvider().addScope("repo");
 
 /** Githubログイン */
 export const signInGithub = () => signInWithPopup(firebaseAuth, githubProvider);

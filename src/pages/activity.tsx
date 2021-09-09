@@ -49,8 +49,6 @@ const Activity: NextPage = () => {
     data: [],
     color: "blue",
   });
-  const initDailyBarContent = () =>
-    setDailyBarContent({ title: "", data: [], color: "blue" });
 
   // カレンダー 経験値に応じて色付け
   const { exps } = activity;
@@ -102,14 +100,6 @@ const Activity: NextPage = () => {
               value={activityLog?.level?.todayData}
               preValue={activityLog?.level?.yesterdayData}
               color="bg-pink-400"
-              // onClick={() => {
-              //   setDailyBarContent({
-              //     title: "レベル",
-              //     data: mockData,
-              //     color: "pink",
-              //   });
-              //   onClickOpen();
-              // }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -120,14 +110,6 @@ const Activity: NextPage = () => {
               preValue={activityLog?.experiencePoint?.yesterdayData}
               unit="Exp"
               color="bg-gray-400"
-              // onClick={() => {
-              //   setDailyBarContent({
-              //     title: "経験値",
-              //     data: mockData,
-              //     color: "gray",
-              //   });
-              //   onClickOpen();
-              // }}
             />
           </div>
         </div>
