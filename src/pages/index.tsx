@@ -9,16 +9,31 @@ import { withAuth } from "~/hocs";
 import { Level } from "~/components/organisms/level";
 import { Ranking } from "~/components/organisms/ranking";
 import { SimpleCard } from "~/components/organisms/card";
+import { useEffect, useState } from "react";
+import { useAuth } from "~/hooks";
+import { getUserLevel } from "~/data/remote/user";
 
 const Home: NextPage = () => {
-  // const { whileLoading } = useLoading();
+  let [level, setLevel] = useState({
+    experiencePoint: 0,
+    level: 0,
+  });
+  const auth = useAuth();
+  const token = auth.fbIdToken;
+  useEffect(() => {
+    const getUserLevelAsync = async () => {
+      const result = await getUserLevel(token);
+      setLevel(result.data.todayLevel);
+    };
+    getUserLevelAsync();
+  }, [token]);
   return (
     <MainLayout>
       <div className="container mx-auto md:py-10 py-20 text-center">
         <SimpleCard>
           <div className="flex md:py-10 py-20 justify-center lg:flex-row flex-col h-full">
             <div className="lg:flex-1">
-              <Level level={20} progress={50} />
+              <Level level={level.level} experience={level.experiencePoint} />
             </div>
             <div className="lg:flex-1 p-10">
               <Ranking />

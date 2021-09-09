@@ -10,24 +10,26 @@ export const Ranking: VFC<RankingProps> = ({}) => {
     new Array<{ name: string; value: number }>()
   );
 
-  const { authUser } = useAuth();
-  console.log(authUser);
+  const auth = useAuth();
+  const token = auth.fbIdToken;
 
   //todo ごちゃっとしてるのでリファクタリングしたい
   useEffect(() => {
     const result = new Array<{ name: string; value: number }>();
-    axios.get("http://localhost:3000/rank.json").then((res) => {
-      res.data.forEach((d) => {
-        result.push({ name: d.user.userName, value: d.level });
+    axios(token)
+      .get("/rank")
+      .then((res) => {
+        res.data.forEach((d) => {
+          result.push({ name: d.user.userName, value: d.level });
+        });
+        const sortedLevels = result.sort(function (a, b) {
+          if (a.value > b.value) return -1;
+          if (a.value < b.value) return 1;
+          return 0;
+        });
+        setLevels(sortedLevels);
       });
-      const sortedLevels = result.sort(function (a, b) {
-        if (a.value > b.value) return -1;
-        if (a.value < b.value) return 1;
-        return 0;
-      });
-      setLevels(sortedLevels);
-    });
-  }, []);
+  }, [token]);
 
   return (
     <div
