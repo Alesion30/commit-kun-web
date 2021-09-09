@@ -15,12 +15,21 @@ import {
 } from "~/components/organisms/chart";
 import useActivity from "~/hooks/activity";
 import dayjs from "~/plugins/dayjs";
+import useLoading from "~/hooks/loading";
 
 const Activity: NextPage = () => {
+  // ローディング
+  const { whileLoading } = useLoading();
+
   // アクティビティ情報
   const activity = useActivity();
   const { activityLog } = activity;
-  const { workTime, commit, typeNum, prComment } = activity;
+  const {
+    getDailyWorkTime,
+    getDailyCommit,
+    getDailyTypeNum,
+    getDailyPrComment,
+  } = activity;
 
   // カレンダー年月
   const { startMonthDate, onClickPrevMonth, onClickNextMonth } = activity;
@@ -40,6 +49,8 @@ const Activity: NextPage = () => {
     data: [],
     color: "blue",
   });
+  const initDailyBarContent = () =>
+    setDailyBarContent({ title: "", data: [], color: "blue" });
 
   // カレンダー 経験値に応じて色付け
   const { exps } = activity;
@@ -118,16 +129,17 @@ const Activity: NextPage = () => {
               preValue={activityLog?.workTime?.yesterdayData}
               unit="hour"
               color="bg-blue-400"
-              // onClick={() => {
-              //   setDailyBarContent({
-              //     title: "作業時間",
-              //     data: workTime
-              //       ? workTime.hours.map((hour) => hour.workTime)
-              //       : [],
-              //     color: "blue",
-              //   });
-              //   onClickOpen();
-              // }}
+              onClick={() => {
+                whileLoading(async () => {
+                  const data = await getDailyWorkTime(date);
+                  setDailyBarContent({
+                    title: "作業時間",
+                    data: data,
+                    color: "blue",
+                  });
+                  onClickOpen();
+                });
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -137,14 +149,17 @@ const Activity: NextPage = () => {
               value={activityLog?.commit?.todayData}
               preValue={activityLog?.commit?.yesterdayData}
               color="bg-red-400"
-              // onClick={() => {
-              //   setDailyBarContent({
-              //     title: "コミット数",
-              //     data: commit ? commit.hours.map((hour) => hour.commit) : [],
-              //     color: "red",
-              //   });
-              //   onClickOpen();
-              // }}
+              onClick={() => {
+                whileLoading(async () => {
+                  const data = await getDailyCommit(date);
+                  setDailyBarContent({
+                    title: "コミット数",
+                    data: data,
+                    color: "red",
+                  });
+                  onClickOpen();
+                });
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -155,16 +170,17 @@ const Activity: NextPage = () => {
               preValue={activityLog?.typeNum?.yesterdayData}
               unit="words"
               color="bg-green-400"
-              // onClick={() => {
-              //   setDailyBarContent({
-              //     title: "コード量",
-              //     data: typeNum
-              //       ? typeNum.hours.map((hour) => hour.typeNum)
-              //       : [],
-              //     color: "green",
-              //   });
-              //   onClickOpen();
-              // }}
+              onClick={() => {
+                whileLoading(async () => {
+                  const data = await getDailyTypeNum(date);
+                  setDailyBarContent({
+                    title: "コード量",
+                    data: data,
+                    color: "green",
+                  });
+                  onClickOpen();
+                });
+              }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
@@ -174,16 +190,17 @@ const Activity: NextPage = () => {
               value={activityLog?.prComment?.todayData}
               preValue={activityLog?.prComment?.yesterdayData}
               color="bg-yellow-400"
-              // onClick={() => {
-              //   setDailyBarContent({
-              //     title: "PRコメント数",
-              //     data: prComment
-              //       ? prComment.hours.map((hour) => hour.prComment)
-              //       : [],
-              //     color: "yellow",
-              //   });
-              //   onClickOpen();
-              // }}
+              onClick={() => {
+                whileLoading(async () => {
+                  const data = await getDailyPrComment(date);
+                  setDailyBarContent({
+                    title: "PRコメント数",
+                    data: data,
+                    color: "yellow",
+                  });
+                  onClickOpen();
+                });
+              }}
             />
           </div>
         </div>

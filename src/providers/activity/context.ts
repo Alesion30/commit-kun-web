@@ -1,12 +1,5 @@
 import { createContext } from "react";
-import {
-  ActivityLogResponse,
-  CommitResponse,
-  ExpResponse,
-  PrCommentResponse,
-  TypeNumResponse,
-  WorkTimeResponse,
-} from "~/data/remote/activity";
+import { ActivityLogResponse, ExpResponse } from "~/data/remote/activity";
 import { Dayjs } from "~/plugins/dayjs";
 
 export type ActivityContextProps = {
@@ -17,10 +10,10 @@ export type ActivityContextProps = {
   onClickPrevMonth: () => void;
   onClickNextMonth: () => void;
   activityLog: ActivityLogResponse;
-  workTime: WorkTimeResponse;
-  commit: CommitResponse;
-  typeNum: TypeNumResponse;
-  prComment: PrCommentResponse;
+  getDailyWorkTime: (date: Dayjs) => Promise<number[]>;
+  getDailyCommit: (date: Dayjs) => Promise<number[]>;
+  getDailyTypeNum: (date: Dayjs) => Promise<number[]>;
+  getDailyPrComment: (date: Dayjs) => Promise<number[]>;
   exps: ExpResponse;
 };
 
@@ -31,10 +24,10 @@ export const ActivityContext = createContext<ActivityContextProps>({
   startMonthDate: null,
   onClickPrevMonth: () => {},
   onClickNextMonth: () => {},
+  getDailyWorkTime: null,
+  getDailyCommit: null,
+  getDailyTypeNum: null,
+  getDailyPrComment: null,
   activityLog: null,
-  workTime: null,
-  commit: null,
-  typeNum: null,
-  prComment: null,
   exps: [],
 });

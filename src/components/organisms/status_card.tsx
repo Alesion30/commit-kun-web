@@ -54,15 +54,15 @@ export const StatusCard: VFC<StatusCardProps> = ({
         style={{ opacity: opacity }}
         className="py-4 text-left mx-5 transition duration-700 ease-in-out"
       >
-        {preValue && (
-          <span className="text-2xl text-red-500">
+        {preValue != null && (
+          <span className="text-2xl">
             {preValue}
             <span className="text-xl">{unit}</span>
             &nbsp;-&gt;&nbsp;
           </span>
         )}
-        <span className="text-3xl">{value ?? "-"}</span>
-        {unit && <span className="text-2xl">{unit}</span>}
+        <span className="text-4xl text-red-500">{value ?? "-"}</span>
+        {unit && <span className="text-3xl">{unit}</span>}
       </p>
     </SimpleCard>
   );

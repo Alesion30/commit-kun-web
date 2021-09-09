@@ -3,7 +3,6 @@ import { ActivityContext } from "./context";
 import { useAuth } from "~/hooks";
 import {
   ActivityLogResponse,
-  CommitResponse,
   ExpResponse,
   getActivityLog,
   getCommit,
@@ -11,9 +10,6 @@ import {
   getPrComment,
   getTypeNum,
   getWorkTime,
-  PrCommentResponse,
-  TypeNumResponse,
-  WorkTimeResponse,
 } from "~/data/remote/activity";
 import dayjs, { Dayjs } from "~/plugins/dayjs";
 
@@ -44,11 +40,67 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
   // 活動記録
   const [activityLog, setActivityLog] = useState<ActivityLogResponse>(null);
 
-  // 一日のデータ
-  const [workTime, setWorkTime] = useState<WorkTimeResponse>(null);
-  const [commit, setCommit] = useState<CommitResponse>(null);
-  const [typeNum, setTypeNum] = useState<TypeNumResponse>(null);
-  const [prComment, setPrComment] = useState<PrCommentResponse>(null);
+  /** 作業時間 1時間毎 */
+  const getDailyWorkTime = useCallback(
+    async (date: Dayjs) => {
+      let dailyData: number[] = [];
+      if (token) {
+        const workTime = (await getWorkTime(token, date)).data;
+        dailyData = workTime ? workTime.hours.map((hour) => hour.workTime) : [];
+      } else {
+        console.error("requried firebase token");
+      }
+      return dailyData;
+    },
+    [token]
+  );
+
+  /** コミット数 1時間毎 */
+  const getDailyCommit = useCallback(
+    async (date: Dayjs) => {
+      let dailyData: number[] = [];
+      if (token) {
+        const commit = (await getCommit(token, date)).data;
+        dailyData = commit ? commit.hours.map((hour) => hour.commit) : [];
+      } else {
+        console.error("requried firebase token");
+      }
+      return dailyData;
+    },
+    [token]
+  );
+
+  /** コード量 1時間毎 */
+  const getDailyTypeNum = useCallback(
+    async (date: Dayjs) => {
+      let dailyData: number[] = [];
+      if (token) {
+        const typeNum = (await getTypeNum(token, date)).data;
+        dailyData = typeNum ? typeNum.hours.map((hour) => hour.typeNum) : [];
+      } else {
+        console.error("requried firebase token");
+      }
+      return dailyData;
+    },
+    [token]
+  );
+
+  /** PRコメント数 1時間毎 */
+  const getDailyPrComment = useCallback(
+    async (date: Dayjs) => {
+      let dailyData: number[] = [];
+      if (token) {
+        const prComment = (await getPrComment(token, date)).data;
+        dailyData = prComment
+          ? prComment.hours.map((hour) => hour.prComment)
+          : [];
+      } else {
+        console.error("requried firebase token");
+      }
+      return dailyData;
+    },
+    [token]
+  );
 
   // 経験値
   const [exps, setExps] = useState<ExpResponse>([]);
@@ -61,34 +113,12 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
 
       // 初期化
       setActivityLog(null);
-      // setWorkTime(null);
-      // setCommit(null);
-      // setTypeNum(null);
-      // setPrComment(null);
 
       if (token) {
         try {
           // 作業記録をセット
           const activityLog = (await getActivityLog(token, date)).data;
           setActivityLog(activityLog);
-
-          // // 作業時間
-          // const workTime = (await getWorkTime(token, date)).data;
-
-          // // コミット数
-          // const commit = (await getCommit(token, date)).data;
-
-          // // コード量
-          // const typeNum = (await getTypeNum(token, date)).data;
-
-          // // PRレビューのコメント数
-          // const prComment = (await getPrComment(token, date)).data;
-
-          // // セット
-          // setWorkTime(workTime);
-          // setCommit(commit);
-          // setTypeNum(typeNum);
-          // setPrComment(prComment);
         } catch (e) {
           console.error(e);
         }
@@ -167,10 +197,10 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         onClickPrevMonth,
         onClickNextMonth,
         activityLog,
-        workTime,
-        commit,
-        typeNum,
-        prComment,
+        getDailyWorkTime,
+        getDailyCommit,
+        getDailyTypeNum,
+        getDailyPrComment,
         exps,
       }}
     >

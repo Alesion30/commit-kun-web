@@ -50,7 +50,7 @@ export const getActivityLog = (token: string, date: Dayjs) =>
   axios(token).get<ActivityLogResponse>("/user/active-log", {
     params: {
       timeDifference: 9,
-      // date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
+      date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
     },
   });
 
