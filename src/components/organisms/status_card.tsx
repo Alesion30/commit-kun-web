@@ -50,20 +50,23 @@ export const StatusCard: VFC<StatusCardProps> = ({
       <div className="flex justify-between px-5 pt-6 mb-2 text-md text-gray-600">
         <p>{label}</p>
       </div>
-      <p
-        style={{ opacity: opacity }}
-        className="py-4 text-left mx-5 transition duration-700 ease-in-out"
-      >
-        {preValue != null && (
-          <span className="text-3xl">
-            {preValue}
-            <span className="text-xl">{unit}</span>
-            <span>&nbsp;-&gt;&nbsp;</span>
-          </span>
-        )}
-        <span className="text-5xl text-red-500">{value ?? "-"}</span>
-        {unit && <span className="text-3xl">{unit}</span>}
-      </p>
+      {value != null && (
+        <p
+          style={{ opacity: opacity }}
+          className="py-4 text-left mx-5 transition duration-700 ease-in-out"
+        >
+          {preValue != null && (
+            <span className="text-3xl">
+              {preValue}
+              <span className="text-xl">{unit}</span>
+              <span>&nbsp;-&gt;&nbsp;</span>
+            </span>
+          )}
+          <span className="text-5xl text-red-500">{value ?? "-"}</span>
+          {unit && <span className="text-3xl">{unit}</span>}
+        </p>
+      )}
+      {value == null && <p className="py-10 text-left"></p>}
     </SimpleCard>
   );
 };
