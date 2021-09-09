@@ -3,8 +3,8 @@ import axiosBase from "axios";
 const axios = (token?: string) => {
   const customAxios = axiosBase.create({
     // baseURL: "http://localhost:8880",
-    baseURL: "https://commit-kun.herokuapp.com",
-    // baseURL: "http://160.251.53.30/api/v1",
+    // baseURL: "https://commit-kun.herokuapp.com",
+    baseURL: "https://commit-kun.net/api/v1/",
     headers: {
       "Content-Type": "application/json",
       "X-Requested-With": "XMLHttpRequest",
