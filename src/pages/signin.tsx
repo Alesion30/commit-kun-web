@@ -9,7 +9,7 @@ import { createUser, getUser, updateUser } from "~/data/remote/user";
 import { withoutAuth } from "~/hocs";
 import { useAuth } from "~/hooks";
 import { signInGithub, credentialFromResultGitHub } from "~/plugins/firebase";
-import { Octokit, App } from "octokit";
+import { Octokit } from "octokit";
 
 const Signin: NextPage = () => {
   const auth = useAuth();

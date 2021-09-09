@@ -157,7 +157,7 @@ const Activity: NextPage = () => {
           </div>
           <div className="m-2 2xl:flex-1 flex-auto">
             <StatusCard
-              title="コード量"
+              title="変更コード量"
               label={dateStr}
               value={activityLog?.typeNum?.todayData}
               preValue={activityLog?.typeNum?.yesterdayData}
@@ -167,7 +167,7 @@ const Activity: NextPage = () => {
                 whileLoading(async () => {
                   const data = await getDailyTypeNum(date);
                   setDailyBarContent({
-                    title: "コード量",
+                    title: "変更コード量",
                     data: data,
                     color: "green",
                   });
@@ -178,7 +178,7 @@ const Activity: NextPage = () => {
           </div>
           <div className="m-2 2xl:flex-1 flex-auto">
             <StatusCard
-              title="PRコメント数"
+              title="PRレビューコメント数"
               label={dateStr}
               value={activityLog?.prComment?.todayData}
               preValue={activityLog?.prComment?.yesterdayData}
@@ -187,7 +187,7 @@ const Activity: NextPage = () => {
                 whileLoading(async () => {
                   const data = await getDailyPrComment(date);
                   setDailyBarContent({
-                    title: "PRコメント数",
+                    title: "PRレビューコメント数",
                     data: data,
                     color: "yellow",
                   });
