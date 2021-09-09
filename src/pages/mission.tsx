@@ -51,7 +51,7 @@ const Mission: NextPage = () => {
           />
           <SimpleCard roundless>
             <div className="flex flex-col items-center">
-              <div className="sm:mx-10 mx-1 sm:my-5 my-2 lg:w-4/5">
+              <div className="sm:mx-10 mx-1 sm:my-5 my-2 px-2 w-full md:w-4/5">
                 {missions.map((mission, index) => {
                   return (
                     <div
