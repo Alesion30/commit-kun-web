@@ -1,5 +1,5 @@
 import axios from "~/plugins/axios";
-import dayjs, { Dayjs } from "~/plugins/dayjs";
+import { Dayjs } from "~/plugins/dayjs";
 
 export type Hour =
   | 0
@@ -26,6 +26,33 @@ export type Hour =
   | 21
   | 22
   | 23;
+
+// ****************************************************************
+// 作業ログを取得
+// ****************************************************************
+
+export type ActivityData = {
+  todayData: number;
+  yesterdayData: number;
+};
+
+export type ActivityLogResponse = {
+  level: ActivityData;
+  experiencePoint: ActivityData;
+  workTime: ActivityData;
+  typeNum: ActivityData;
+  commit: ActivityData;
+  prComment: ActivityData;
+};
+
+/** 作業記録を取得 */
+export const getActivityLog = (token: string, date: Dayjs) =>
+  axios(token).get<ActivityLogResponse>("/user/active-log", {
+    params: {
+      timeDifference: 9,
+      // date: date.startOf("d").format("YYYY-MM-DDTHH:mm:ss"),
+    },
+  });
 
 // ****************************************************************
 // 作業時間

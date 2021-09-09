@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import {
+  ActivityLogResponse,
   CommitResponse,
   ExpResponse,
   PrCommentResponse,
@@ -15,6 +16,7 @@ export type ActivityContextProps = {
   startMonthDate: Dayjs;
   onClickPrevMonth: () => void;
   onClickNextMonth: () => void;
+  activityLog: ActivityLogResponse;
   workTime: WorkTimeResponse;
   commit: CommitResponse;
   typeNum: TypeNumResponse;
@@ -29,6 +31,7 @@ export const ActivityContext = createContext<ActivityContextProps>({
   startMonthDate: null,
   onClickPrevMonth: () => {},
   onClickNextMonth: () => {},
+  activityLog: null,
   workTime: null,
   commit: null,
   typeNum: null,

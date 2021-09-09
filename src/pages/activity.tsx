@@ -19,6 +19,7 @@ import dayjs from "~/plugins/dayjs";
 const Activity: NextPage = () => {
   // アクティビティ情報
   const activity = useActivity();
+  const { activityLog } = activity;
   const { workTime, commit, typeNum, prComment } = activity;
 
   // カレンダー年月
@@ -76,8 +77,8 @@ const Activity: NextPage = () => {
             <StatusCard
               title="レベル"
               label="TOTAL"
-              value="25"
-              preValue="16"
+              value={activityLog?.level?.todayData}
+              preValue={activityLog?.level?.yesterdayData}
               color="bg-pink-400"
               // onClick={() => {
               //   setDailyBarContent({
@@ -93,8 +94,8 @@ const Activity: NextPage = () => {
             <StatusCard
               title="経験値"
               label="TOTAL"
-              value="2500"
-              preValue="1600"
+              value={activityLog?.experiencePoint?.todayData}
+              preValue={activityLog?.experiencePoint?.yesterdayData}
               unit="Exp"
               color="bg-gray-400"
               // onClick={() => {
@@ -113,72 +114,76 @@ const Activity: NextPage = () => {
             <StatusCard
               title="作業時間"
               label={dateStr}
-              value={`${workTime?.workTime ?? "-"}`}
+              value={activityLog?.workTime?.todayData}
+              preValue={activityLog?.workTime?.yesterdayData}
               unit="hour"
               color="bg-blue-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "作業時間",
-                  data: workTime
-                    ? workTime.hours.map((hour) => hour.workTime)
-                    : [],
-                  color: "blue",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "作業時間",
+              //     data: workTime
+              //       ? workTime.hours.map((hour) => hour.workTime)
+              //       : [],
+              //     color: "blue",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
               title="コミット数"
               label={dateStr}
-              value={`${commit?.commitNum ?? "-"}`}
+              value={activityLog?.commit?.todayData}
+              preValue={activityLog?.commit?.yesterdayData}
               color="bg-red-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "コミット数",
-                  data: commit ? commit.hours.map((hour) => hour.commit) : [],
-                  color: "red",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "コミット数",
+              //     data: commit ? commit.hours.map((hour) => hour.commit) : [],
+              //     color: "red",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
               title="コード量"
               label={dateStr}
-              value={`${typeNum?.typeNum ?? "-"}`}
+              value={activityLog?.typeNum?.todayData}
+              preValue={activityLog?.typeNum?.yesterdayData}
               unit="words"
               color="bg-green-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "コード量",
-                  data: typeNum
-                    ? typeNum.hours.map((hour) => hour.typeNum)
-                    : [],
-                  color: "green",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "コード量",
+              //     data: typeNum
+              //       ? typeNum.hours.map((hour) => hour.typeNum)
+              //       : [],
+              //     color: "green",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
               title="PRコメント数"
               label={dateStr}
-              value={`${prComment?.prCommentNum ?? "-"}`}
+              value={activityLog?.prComment?.todayData}
+              preValue={activityLog?.prComment?.yesterdayData}
               color="bg-yellow-400"
-              onClick={() => {
-                setDailyBarContent({
-                  title: "PRコメント数",
-                  data: prComment
-                    ? prComment.hours.map((hour) => hour.prComment)
-                    : [],
-                  color: "yellow",
-                });
-                onClickOpen();
-              }}
+              // onClick={() => {
+              //   setDailyBarContent({
+              //     title: "PRコメント数",
+              //     data: prComment
+              //       ? prComment.hours.map((hour) => hour.prComment)
+              //       : [],
+              //     color: "yellow",
+              //   });
+              //   onClickOpen();
+              // }}
             />
           </div>
         </div>

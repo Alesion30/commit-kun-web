@@ -2,8 +2,10 @@ import { ReactNode, VFC, useEffect, useState, useCallback } from "react";
 import { ActivityContext } from "./context";
 import { useAuth } from "~/hooks";
 import {
+  ActivityLogResponse,
   CommitResponse,
   ExpResponse,
+  getActivityLog,
   getCommit,
   getDailyExps,
   getPrComment,
@@ -39,6 +41,10 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
     setStartMonthDate(nextMonthDate);
   };
 
+  // 活動記録
+  const [activityLog, setActivityLog] = useState<ActivityLogResponse>(null);
+
+  // 一日のデータ
   const [workTime, setWorkTime] = useState<WorkTimeResponse>(null);
   const [commit, setCommit] = useState<CommitResponse>(null);
   const [typeNum, setTypeNum] = useState<TypeNumResponse>(null);
@@ -54,30 +60,35 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
       setIsLoading(true);
 
       // 初期化
-      setWorkTime(null);
-      setCommit(null);
-      setTypeNum(null);
-      setPrComment(null);
+      setActivityLog(null);
+      // setWorkTime(null);
+      // setCommit(null);
+      // setTypeNum(null);
+      // setPrComment(null);
 
       if (token) {
         try {
-          // 作業時間
-          const workTime = (await getWorkTime(token, date)).data;
+          // 作業記録をセット
+          const activityLog = (await getActivityLog(token, date)).data;
+          setActivityLog(activityLog);
 
-          // コミット数
-          const commit = (await getCommit(token, date)).data;
+          // // 作業時間
+          // const workTime = (await getWorkTime(token, date)).data;
 
-          // コード量
-          const typeNum = (await getTypeNum(token, date)).data;
+          // // コミット数
+          // const commit = (await getCommit(token, date)).data;
 
-          // PRレビューのコメント数
-          const prComment = (await getPrComment(token, date)).data;
+          // // コード量
+          // const typeNum = (await getTypeNum(token, date)).data;
 
-          // セット
-          setWorkTime(workTime);
-          setCommit(commit);
-          setTypeNum(typeNum);
-          setPrComment(prComment);
+          // // PRレビューのコメント数
+          // const prComment = (await getPrComment(token, date)).data;
+
+          // // セット
+          // setWorkTime(workTime);
+          // setCommit(commit);
+          // setTypeNum(typeNum);
+          // setPrComment(prComment);
         } catch (e) {
           console.error(e);
         }
@@ -155,6 +166,7 @@ export const ActivityProvider: VFC<ActivityProviderProps> = ({ children }) => {
         startMonthDate,
         onClickPrevMonth,
         onClickNextMonth,
+        activityLog,
         workTime,
         commit,
         typeNum,

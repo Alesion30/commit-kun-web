@@ -4,8 +4,8 @@ import { classNames } from "~/utils";
 
 type StatusCardProps = {
   title: string;
-  value?: string;
-  preValue?: string;
+  value?: string | number;
+  preValue?: string | number;
   onClick?: () => void;
   /** ラベル */
   label: string;
