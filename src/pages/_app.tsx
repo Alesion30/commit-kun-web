@@ -3,6 +3,7 @@ import { AppProps } from "next/app";
 import "tailwindcss/tailwind.css";
 import { AuthProvider } from "~/providers/auth";
 import { LoadingProvider } from "~/providers/loading";
+import SnackbarProvider from "react-simple-snackbar";
 import { BasicProvider } from "~/providers/basic";
 import { MissionProvider } from "~/providers/mission";
 import { ActivityProvider } from "~/providers/activity";
@@ -14,13 +15,15 @@ const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
       <LoadingProvider>
-        <BasicProvider>
-          <MissionProvider>
-            <ActivityProvider>
-              <Component {...pageProps} />
-            </ActivityProvider>
-          </MissionProvider>
-        </BasicProvider>
+        <SnackbarProvider>
+          <BasicProvider>
+            <MissionProvider>
+              <ActivityProvider>
+                <Component {...pageProps} />
+              </ActivityProvider>
+            </MissionProvider>
+          </BasicProvider>
+        </SnackbarProvider>
       </LoadingProvider>
     </AuthProvider>
   );

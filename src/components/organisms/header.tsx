@@ -1,5 +1,6 @@
 import { VFC } from "react";
 import Image from "next/image";
+import { useSnackbar } from "react-simple-snackbar";
 import { Disclosure } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import {
@@ -34,10 +35,15 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
   const router = useRouter();
   const pathname = router.pathname;
 
+  // snackbar
+  const [openSnackbar] = useSnackbar();
+
   // ユーザーIDをコピー
   const auth = useAuth();
-  const onClickUserIdCopy = () =>
-    navigator.clipboard.writeText(auth.authUser?.uid ?? "");
+  const onClickUserIdCopy = async () => {
+    await navigator.clipboard.writeText(auth.authUser?.uid ?? "");
+    openSnackbar("ユーザーIDをコピーしました");
+  };
 
   // メイン ナビゲーション
   const navigations: Navigation[] = [
