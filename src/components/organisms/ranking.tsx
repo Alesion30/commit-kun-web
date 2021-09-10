@@ -27,7 +27,7 @@ export const Ranking: VFC<RankingProps> = ({ rankings }) => {
             {rankings.map((item, index) => {
               const rank = index + 1;
 
-              let bgColor;
+              let bgColor: string;
               let isFontWeight = false;
 
               switch (rank) {
