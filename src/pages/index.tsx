@@ -77,7 +77,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="lg:flex-1 p-10">
+          <div className="lg:flex-1 md:p-10 p-4">
             <Ranking />
           </div>
         </div>

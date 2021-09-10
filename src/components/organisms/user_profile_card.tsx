@@ -35,16 +35,13 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
           imageURL={authUser?.photoURL}
           className="w-72 h-72 xl:mr-10"
         />
-        <div className="w-72 my-4">
-          <p className="sm:text-4xl text-3xl text-center mb-5">
-            ランク: {rank}位
+        <div className="w-72 my-4 text-center">
+          <p className="sm:text-5xl text-4xl font-semibold mb-7">
+            {authUser?.userName ?? ""}
           </p>
-          <p className="sm:text-4xl text-3xl text-center mb-5">
-            レベル: {level}
-          </p>
-          <p className="sm:text-4xl text-3xl text-center">
-            経験値: {experience}
-          </p>
+          <p className="sm:text-3xl text-2xl mb-3">ランク: {rank}位</p>
+          <p className="sm:text-3xl text-2xl mb-3">レベル: {level}</p>
+          <p className="sm:text-3xl text-2xl">経験値: {experience}</p>
         </div>
       </div>
     </SimpleCard>
