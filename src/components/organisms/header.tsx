@@ -10,6 +10,7 @@ import { NavbarLink } from "~/components/atoms/link";
 import { useRouter } from "next/router";
 import CommitKunLogo from "~/assets/img/commit-kun.svg";
 import CommitKunIcon from "~/assets/img/commit-kun-icon.png";
+import { useAuth } from "~/hooks";
 
 type Navigation = {
   name: string;
@@ -30,6 +31,14 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
   onClickSignOut,
   myImageURL,
 }) => {
+  const router = useRouter();
+  const pathname = router.pathname;
+
+  // ユーザーIDをコピー
+  const auth = useAuth();
+  const onClickUserIdCopy = () =>
+    navigator.clipboard.writeText(auth.authUser?.uid ?? "");
+
   // メイン ナビゲーション
   const navigations: Navigation[] = [
     { name: "ホーム", href: "/" },
@@ -42,11 +51,9 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
   const profileNavigations: ProfileDropdownNavigation[] = [
     // { name: "Your Profile", href: "" },
     // { name: "Settings", href: "" },
-    { name: "Sign out", onClick: onClickSignOut },
+    { name: "ユーザーIDをコピー", onClick: onClickUserIdCopy },
+    { name: "ログアウト", onClick: onClickSignOut },
   ];
-
-  const router = useRouter();
-  const pathname = router.pathname;
 
   return (
     <Disclosure as="nav" className="bg-gray-700">
