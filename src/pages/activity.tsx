@@ -59,13 +59,13 @@ const Activity: NextPage = () => {
 
     // 背景色
     let bgColor = "bg-white";
-    if (point > 1000) {
+    if (point > 500) {
       bgColor = "bg-green-500";
-    } else if (point > 800) {
+    } else if (point > 200) {
       bgColor = "bg-green-400";
-    } else if (point > 500) {
-      bgColor = "bg-green-300";
     } else if (point > 100) {
+      bgColor = "bg-green-300";
+    } else if (point > 50) {
       bgColor = "bg-green-200";
     } else if (point > 0) {
       bgColor = "bg-green-100";
