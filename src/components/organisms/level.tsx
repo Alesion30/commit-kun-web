@@ -22,13 +22,11 @@ export const Level: VFC<LevelProps> = ({ level, experience }) => {
       return;
     }
     const prog = experience - (level - 1) * 300;
-    console.log(prog);
     if (prog < 0) {
       setProgress(0);
       return;
     }
     setProgress((prog / 300) * 100);
-    console.log(progress);
   }, [experience, level, progress]);
   return (
     <div className="relative flex flex-col h-full justify-center">

@@ -28,7 +28,6 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
           // IDトークンをセット
           const idToken = await user.getIdToken();
           setFbIdToken(idToken);
-          console.log(idToken);
 
           // GitHubAPIのトークンをCookieから取得
           const token = getGitHubToken();
