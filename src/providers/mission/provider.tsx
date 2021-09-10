@@ -17,11 +17,12 @@ export const MissionProvider: VFC<MissionProviderProps> = ({ children }) => {
 
   const [normalMissionPage, setNormalMissionPage] = useState<number>(1);
   const nextNormalMissionPage = async () => {
-    setNormalMissionPage(normalMissionPage + 1);
-    const newNormalMissions = (await getNormalMission(token, normalMissionPage))
-      .data;
+    const newNormalMissions = (
+      await getNormalMission(token, normalMissionPage + 1)
+    ).data;
     const concatNormalMissions = normalMissions.concat(newNormalMissions);
     setNormalMissions(concatNormalMissions);
+    setNormalMissionPage(normalMissionPage + 1); // ページ更新
   };
 
   const [dailyMissions, setDailyMissions] = useState<MissionResponse>([]);
