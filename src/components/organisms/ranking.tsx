@@ -1,6 +1,7 @@
-import { useEffect, useState, VFC } from "react";
+import React, { useEffect, useState, VFC } from "react";
 import { useAuth } from "~/hooks";
 import { getRankings, RankingsResponse } from "~/data/remote/ranking";
+import { Avatar } from "../atoms/avatar";
 
 type RankingProps = {
   rankings: RankingsResponse;
@@ -24,9 +25,16 @@ export const Ranking: VFC<RankingProps> = ({ rankings }) => {
           </thead>
           <tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full">
             {rankings.map((item, index) => (
-              <tr className="flex w-full mb-2" key={`ranking_${index}`}>
+              <tr
+                className="flex w-full py-1 hover:bg-gray-200"
+                key={`ranking_${index}`}
+              >
                 <td className="text-center p-4 w-1/6">{index + 1}位</td>
-                <td className="text-center p-4 w-3/6">
+                <td className="p-4 w-3/6 flex items-center justify-center">
+                  <Avatar
+                    className="h-6 w-6 mr-2"
+                    src={item.user?.imageUrl ?? ""}
+                  />
                   {item.user?.userName ?? ""}
                 </td>
                 <td className="text-center p-4 w-2/6">{`Lv.${item.level}`}</td>
