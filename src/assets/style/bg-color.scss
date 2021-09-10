@@ -1,0 +1,21 @@
+$GOLD: #e6b422;
+$SILVER: #c9caca;
+$BRONZE: #b87333;
+
+.bg-gold {
+  background: -moz-linear-gradient(top left, #fff, $GOLD);
+  background: -webkit-linear-gradient(top left, #fff, $GOLD);
+  background: linear-gradient(to bottom right, #fff, $GOLD);
+}
+
+.bg-silver {
+  background: -moz-linear-gradient(top left, #fff, $SILVER);
+  background: -webkit-linear-gradient(top left, #fff, $SILVER);
+  background: linear-gradient(to bottom right, #fff, $SILVER);
+}
+
+.bg-bronze {
+  background: -moz-linear-gradient(top left, #fff, $BRONZE);
+  background: -webkit-linear-gradient(top left, #fff, $BRONZE);
+  background: linear-gradient(to bottom right, #fff, $BRONZE);
+}

@@ -6,7 +6,8 @@ import { LoadingProvider } from "~/providers/loading";
 import { BasicProvider } from "~/providers/basic";
 import { MissionProvider } from "~/providers/mission";
 import { ActivityProvider } from "~/providers/activity";
-import "~/assets/style/loading.css";
+import "~/assets/style/bg-color.scss";
+import "~/assets/style/loading.scss";
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   return (
