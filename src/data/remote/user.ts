@@ -43,9 +43,6 @@ export type UserLevelResponse = {
 export const getUser = (token: string) =>
   axios(token).get<UserResponse>("/user");
 
-export const getUserLevel = (token: string) =>
-  axios(token).get<UserLevelResponse>("/user/level?timeDifference=9.0");
-
 /** ユーザーの基本情報を取得 */
 export const getUserBasicInfo = (token: string) =>
   axios(token).get<UserBasicResponse>("/user/basic");
