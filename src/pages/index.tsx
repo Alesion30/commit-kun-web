@@ -5,13 +5,12 @@
 import { NextPage } from "next";
 import { MainLayout } from "~/components/templates/main";
 import { withAuth } from "~/hocs";
-// import useLoading from "~/hooks/loading";
-import { Level } from "~/components/organisms/level";
+import { UserProfileCard } from "~/components/organisms/user_profile_card";
 import { Ranking } from "~/components/organisms/ranking";
-import { SimpleCard } from "~/components/organisms/card";
 import { useEffect, useState } from "react";
 import { useAuth } from "~/hooks";
 import { getUserLevel } from "~/data/remote/user";
+import { StatusCard } from "~/components/organisms/status_card";
 
 const Home: NextPage = () => {
   let [level, setLevel] = useState({
@@ -27,19 +26,60 @@ const Home: NextPage = () => {
     };
     getUserLevelAsync();
   }, [token]);
+
   return (
     <MainLayout>
-      <div className="container mx-auto md:py-10 py-20 text-center">
-        <SimpleCard>
-          <div className="flex lg:flex-row flex-col md:py-10 py-20 justify-center">
-            <div className="lg:flex-1">
-              <Level level={level.level} experience={level.experiencePoint} />
+      <div className="container mx-auto text-center">
+        <div className="flex lg:flex-row flex-col md:py-10 pt-5 pb-20 h-full justify-center">
+          <div className="lg:flex-1 justify-center items-center">
+            <UserProfileCard
+              rank={0}
+              level={level.level}
+              experience={level.experiencePoint}
+            />
+            <div className="flex my-5">
+              <div className="flex-auto mx-2">
+                <StatusCard
+                  title="作業時間"
+                  label="TOTAL"
+                  value={5}
+                  unit="hour"
+                  color="bg-blue-400"
+                />
+              </div>
+              <div className="flex-auto mx-2">
+                <StatusCard
+                  title="コミット数"
+                  label="TOTAL"
+                  value={5}
+                  color="bg-red-400"
+                />
+              </div>
             </div>
-            <div className="lg:flex-1 p-10">
-              <Ranking />
+            <div className="flex my-5">
+              <div className="flex-auto mx-2">
+                <StatusCard
+                  title="変更コード量"
+                  label="TOTAL"
+                  value={5}
+                  unit="words"
+                  color="bg-green-400"
+                />
+              </div>
+              <div className="flex-auto mx-2">
+                <StatusCard
+                  title="PRレビュー数"
+                  label="TOTAL"
+                  value={5}
+                  color="bg-yellow-400"
+                />
+              </div>
             </div>
           </div>
-        </SimpleCard>
+          <div className="lg:flex-1 p-10">
+            <Ranking />
+          </div>
+        </div>
       </div>
     </MainLayout>
   );

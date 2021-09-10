@@ -32,18 +32,16 @@ export const Ranking: VFC<RankingProps> = ({}) => {
   }, [token]);
 
   return (
-    <div className="relative flex flex-col h-full justify-center">
-      <div>
-        <p className="text-3xl m-5 text-center font-bold">ランキング</p>
+    <div className="relative flex flex-col justify-center">
+      <div className="mb-5 text-center">
+        <p className="text-3xl font-bold">ランキング</p>
       </div>
-      <div className="flex-1 m-2">
-        <CardTable
-          title1="ランク"
-          title2="ユーザー名"
-          title3="レベル"
-          items={levels}
-        />
-      </div>
+      <CardTable
+        title1="ランク"
+        title2="ユーザー名"
+        title3="レベル"
+        items={levels}
+      />
     </div>
   );
 };
