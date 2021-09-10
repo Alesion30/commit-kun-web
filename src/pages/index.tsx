@@ -47,7 +47,7 @@ const Home: NextPage = () => {
   return (
     <MainLayout>
       <div className="container mx-auto text-center">
-        <div className="flex lg:flex-row flex-col md:py-7 pt-5 pb-20 h-full justify-center">
+        <div className="flex lg:flex-row flex-col md:py-7 pt-5 pb-10 h-full justify-center">
           <div className="lg:flex-1 justify-center items-center">
             <UserProfileCard
               rank={basicInfo?.rank ?? 0}
@@ -101,7 +101,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="lg:flex-1 md:px-10 px-2 py-4">
+          <div className="lg:flex-1 md:px-10 px-2 py-14">
             <Ranking rankings={rankings} />
           </div>
         </div>

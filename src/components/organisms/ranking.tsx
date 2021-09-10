@@ -1,6 +1,5 @@
-import React, { useEffect, useState, VFC } from "react";
-import { useAuth } from "~/hooks";
-import { getRankings, RankingsResponse } from "~/data/remote/ranking";
+import React, { VFC } from "react";
+import { RankingsResponse } from "~/data/remote/ranking";
 import { Avatar } from "../atoms/avatar";
 
 type RankingProps = {
