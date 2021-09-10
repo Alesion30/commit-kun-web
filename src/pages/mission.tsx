@@ -76,7 +76,7 @@ const Mission: NextPage = () => {
                 <button
                   type="button"
                   onClick={onClickNextPage}
-                  className="mb-5 group relative w-96 flex justify-center py-4 px-5 border border-transparent text-xl font-bold rounded-2xl text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="mb-5 group relative md:w-96 w-72 flex justify-center py-4 px-5 border border-transparent text-xl font-bold rounded-2xl text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                     <ChevronDownIcon
