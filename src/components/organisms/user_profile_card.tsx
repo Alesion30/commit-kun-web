@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, VFC } from "react";
+import React, { useEffect, useState, VFC } from "react";
 import { useAuth } from "~/hooks";
 import { ImageWithProgress } from "~/components//molecules/image_with_progress";
 import { SimpleCard } from "./card";

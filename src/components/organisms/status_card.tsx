@@ -1,5 +1,6 @@
 import { VFC, useState, useEffect } from "react";
 import { SimpleCard } from "~/components/organisms/card";
+import { ArrowRightIcon } from "@heroicons/react/solid";
 import { classNames } from "~/utils";
 
 type StatusCardProps = {
@@ -62,7 +63,7 @@ export const StatusCard: VFC<StatusCardProps> = ({
             <span className="text-3xl">
               {preValue}
               <span className="text-xl">{unit}</span>
-              <span>&nbsp;-&gt;&nbsp;</span>
+              <ArrowRightIcon className="inline mx-2 mb-1" width={20} />
             </span>
           )}
           <span
