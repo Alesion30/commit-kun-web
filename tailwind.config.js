@@ -25,6 +25,9 @@ module.exports = {
       animation: {
         "fade-in-up": "fade-in-up 0.5s ease-out",
       },
+      backgroundImage: (theme) => ({
+        signin: "url('/img/background2.png')",
+      }),
     },
   },
   variants: {
