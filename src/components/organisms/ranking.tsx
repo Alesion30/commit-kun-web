@@ -1,6 +1,6 @@
 import React, { VFC } from "react";
 import { RankingsResponse } from "~/data/remote/ranking";
-import { classNames } from "~/utils";
+import { classNames, truncateChar } from "~/utils";
 import { Avatar } from "../atoms/avatar";
 
 type RankingProps = {
@@ -66,7 +66,7 @@ export const Ranking: VFC<RankingProps> = ({ rankings }) => {
                       className="h-6 w-6 mr-2"
                       src={item.user?.imageUrl ?? ""}
                     />
-                    {item.user?.userName ?? ""}
+                    {truncateChar(item.user?.userName ?? "")}
                   </td>
                   <td className="text-center p-4 w-2/6">{`Lv.${item.level}`}</td>
                   <td className="text-center p-4 w-2/6">

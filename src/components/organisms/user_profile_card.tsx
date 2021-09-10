@@ -2,7 +2,7 @@ import React, { useEffect, useState, VFC } from "react";
 import { useAuth } from "~/hooks";
 import { ImageWithProgress } from "~/components//molecules/image_with_progress";
 import { SimpleCard } from "./card";
-import { classNames } from "~/utils";
+import { classNames, truncateChar } from "~/utils";
 
 type UserProfileCardProps = {
   rank: number;
@@ -40,10 +40,10 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
       bgColor = "bg-silver";
       isFontWeight = true;
       break;
-    // case 3:
-    //   bgColor = "bg-bronze";
-    //   isFontWeight = true;
-    //   break;
+    case 3:
+      bgColor = "bg-bronze";
+      isFontWeight = true;
+      break;
   }
 
   return (
@@ -54,9 +54,9 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
           imageURL={authUser?.photoURL}
           className="w-72 h-72 xl:mr-10"
         />
-        <div className="w-72 my-4 text-center">
+        <div className="xl:w-72 w-full my-4 text-center">
           <p className="sm:text-5xl text-4xl font-semibold mb-7">
-            {authUser?.userName ?? ""}
+            {truncateChar(authUser?.userName ?? "")}
           </p>
           <p className="sm:text-3xl text-2xl mb-7">
             順位:{" "}
@@ -70,8 +70,6 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
               {rank}位
             </span>
           </p>
-          {/* <p className="sm:text-3xl text-2xl mb-3">レベル: {level}</p>
-          <p className="sm:text-3xl text-2xl">経験値: {experience}Exp</p> */}
         </div>
       </div>
     </SimpleCard>
