@@ -51,6 +51,7 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
       <div className="relative flex xl:flex-row flex-col justify-center items-center my-5 mx-4">
         <ImageWithProgress
           progress={progress}
+          level={level}
           imageURL={authUser?.photoURL}
           className="w-72 h-72 xl:mr-10"
         />
