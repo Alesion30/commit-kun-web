@@ -8,6 +8,7 @@ import { MissionProvider } from "~/providers/mission";
 import { ActivityProvider } from "~/providers/activity";
 import "~/assets/style/bg-color.scss";
 import "~/assets/style/loading.scss";
+import "~/assets/style/table.scss";
 
 const MyApp: VFC<AppProps> = ({ Component, pageProps }) => {
   return (

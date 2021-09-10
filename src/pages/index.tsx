@@ -47,7 +47,7 @@ const Home: NextPage = () => {
   return (
     <MainLayout>
       <div className="container mx-auto text-center">
-        <div className="flex lg:flex-row flex-col md:py-7 pt-5 pb-10 h-full justify-center">
+        <div className="flex xl:flex-row flex-col md:py-7 pt-5 pb-10 h-full justify-center">
           <div className="lg:flex-1 justify-center items-center">
             <UserProfileCard
               rank={basicInfo?.rank ?? 0}
