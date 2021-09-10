@@ -11,8 +11,13 @@ import { useEffect, useState } from "react";
 import { useAuth } from "~/hooks";
 import { getUserLevel } from "~/data/remote/user";
 import { StatusCard } from "~/components/organisms/status_card";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  // アクティビティ画面に遷移
+  const router = useRouter();
+  const onClickActivityPage = () => router.push("/activity");
+
   let [level, setLevel] = useState({
     experiencePoint: 0,
     level: 0,
@@ -45,6 +50,7 @@ const Home: NextPage = () => {
                   value={5}
                   unit="hour"
                   color="bg-blue-400"
+                  onClick={onClickActivityPage}
                 />
               </div>
               <div className="flex-auto mx-2">
@@ -53,6 +59,7 @@ const Home: NextPage = () => {
                   label="TOTAL"
                   value={5}
                   color="bg-red-400"
+                  onClick={onClickActivityPage}
                 />
               </div>
             </div>
@@ -64,14 +71,16 @@ const Home: NextPage = () => {
                   value={5}
                   unit="words"
                   color="bg-green-400"
+                  onClick={onClickActivityPage}
                 />
               </div>
               <div className="flex-auto mx-2">
                 <StatusCard
-                  title="PRレビュー数"
+                  title="PRコメント数"
                   label="TOTAL"
                   value={5}
                   color="bg-yellow-400"
+                  onClick={onClickActivityPage}
                 />
               </div>
             </div>

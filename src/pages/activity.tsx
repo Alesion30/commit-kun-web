@@ -178,7 +178,7 @@ const Activity: NextPage = () => {
           </div>
           <div className="m-2 2xl:flex-1 flex-auto">
             <StatusCard
-              title="PRレビューコメント数"
+              title="PRコメント数"
               label={dateStr}
               value={activityLog?.prComment?.todayData}
               preValue={activityLog?.prComment?.yesterdayData}
@@ -187,7 +187,7 @@ const Activity: NextPage = () => {
                 whileLoading(async () => {
                   const data = await getDailyPrComment(date);
                   setDailyBarContent({
-                    title: "PRレビューコメント数",
+                    title: "PRコメント数",
                     data: data,
                     color: "yellow",
                   });
