@@ -31,7 +31,7 @@ const Home: NextPage = () => {
     <MainLayout>
       <div className="container mx-auto md:py-10 py-20 text-center">
         <SimpleCard>
-          <div className="flex md:py-10 py-20 justify-center lg:flex-row flex-col h-full">
+          <div className="flex lg:flex-row flex-col md:py-10 py-20 justify-center">
             <div className="lg:flex-1">
               <Level level={level.level} experience={level.experiencePoint} />
             </div>

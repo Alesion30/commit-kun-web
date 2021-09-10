@@ -13,7 +13,7 @@ export const Ranking: VFC<RankingProps> = ({}) => {
   const auth = useAuth();
   const token = auth.fbIdToken;
 
-  //todo ごちゃっとしてるのでリファクタリングしたい
+  //TODO: ごちゃっとしてるのでリファクタリングしたい
   useEffect(() => {
     const result = new Array<{ name: string; value: number }>();
     axios(token)
@@ -32,15 +32,17 @@ export const Ranking: VFC<RankingProps> = ({}) => {
   }, [token]);
 
   return (
-    <div
-      className="relative flex flex-col h-full justify-center"
-      style={{ margin: "5%" }}
-    >
+    <div className="relative flex flex-col h-full justify-center">
       <div>
-        <p className="text-3xl m-5 text-center font-medium">Ranking</p>
+        <p className="text-3xl m-5 text-center font-bold">ランキング</p>
       </div>
       <div className="flex-1 m-2">
-        <CardTable title1="Rank" title2="Name" title3="Level" items={levels} />
+        <CardTable
+          title1="ランク"
+          title2="ユーザー名"
+          title3="レベル"
+          items={levels}
+        />
       </div>
     </div>
   );

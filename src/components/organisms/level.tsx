@@ -28,21 +28,22 @@ export const Level: VFC<LevelProps> = ({ level, experience }) => {
     }
     setProgress((prog / 300) * 100);
   }, [experience, level, progress]);
+
   return (
     <div className="relative flex flex-col h-full justify-center">
       <div>
-        <p className="md:text-5xl text-4xl text-center font-medium">
-          level {level}
+        <p className="md:text-5xl text-4xl text-center font-bold">
+          レベル {level}
         </p>
       </div>
-      <div className="relative" style={{ margin: "10%" }}>
+      <div className="relative">
         <ProgressCircleIcon percentage={progress} />
         <div className="absolute h-full w-full bottom-0">
           <img
             className="block h-full w-full rounded-full"
             style={{ padding: "14%" }}
             src={authUser?.photoURL}
-            alt="Workflow"
+            alt="GitHub Icon"
           />
         </div>
       </div>
