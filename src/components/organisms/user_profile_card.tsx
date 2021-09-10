@@ -40,8 +40,8 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
             {authUser?.userName ?? ""}
           </p>
           <p className="sm:text-3xl text-2xl mb-3">ランク: {rank}位</p>
-          <p className="sm:text-3xl text-2xl mb-3">レベル: {level}</p>
-          <p className="sm:text-3xl text-2xl">経験値: {experience}</p>
+          <p className="sm:text-3xl text-2xl mb-3">レベル: Lv.{level}</p>
+          <p className="sm:text-3xl text-2xl">経験値: {experience}Exp</p>
         </div>
       </div>
     </SimpleCard>

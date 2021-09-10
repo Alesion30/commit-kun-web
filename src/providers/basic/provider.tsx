@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, VFC } from "react";
+import { ReactNode, useCallback, useEffect, useState, VFC } from "react";
 import { getUserBasicInfo, UserBasicResponse } from "~/data/remote/user";
 import { useAuth } from "~/hooks";
 import { BasicContext } from "./context";
@@ -12,18 +12,15 @@ export const BasicProvider: VFC<BasicProviderProps> = ({ children }) => {
   const token = auth.fbIdToken;
 
   const [basicInfo, setBasicInfo] = useState<UserBasicResponse>(null);
-  useEffect(() => {
-    const init = async () => {
-      if (token) {
-        const data = (await getUserBasicInfo(token)).data;
-        setBasicInfo(data);
-      }
-    };
-    init();
+  const reload = useCallback(async () => {
+    if (token) {
+      const data = (await getUserBasicInfo(token)).data;
+      setBasicInfo(data);
+    }
   }, [token]);
 
   return (
-    <BasicContext.Provider value={{ basicInfo }}>
+    <BasicContext.Provider value={{ basicInfo, reload }}>
       {children}
     </BasicContext.Provider>
   );
