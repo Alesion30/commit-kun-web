@@ -68,7 +68,7 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
                 bgColor ?? ""
               )}
             >
-              {rank}位
+              {rank > 0 ? rank : "-"}位
             </span>
           </p>
         </div>
