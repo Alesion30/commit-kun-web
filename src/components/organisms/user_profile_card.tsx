@@ -17,23 +17,15 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
   const { authUser } = useAuth();
 
   const [progress, setProgress] = useState(0);
-  const isFirstRender = useRef(false);
   useEffect(() => {
-    isFirstRender.current = true;
-  }, []);
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    const prog = experience - (level - 1) * 300;
+    const LEVEL_STEP = 300;
+    const prog = experience - (level - 1) * LEVEL_STEP;
     if (prog < 0) {
       setProgress(0);
       return;
     }
-    setProgress((prog / 300) * 100);
-  }, [experience, level, progress]);
+    setProgress((prog / LEVEL_STEP) * 100);
+  }, [experience, level]);
 
   return (
     <SimpleCard>

@@ -18,6 +18,16 @@ export type CreateUserRequest = {
   accessToken: string; // GitHubAPIトークン
 };
 
+export type UserBasicResponse = {
+  rank: number;
+  level: number;
+  experiencePoint: number;
+  workTime: number;
+  typeNum: number;
+  commit: number;
+  prComment: number;
+};
+
 export type UserLevelResponse = {
   todayLevel: {
     experiencePoint: number;
@@ -35,6 +45,10 @@ export const getUser = (token: string) =>
 
 export const getUserLevel = (token: string) =>
   axios(token).get<UserLevelResponse>("/user/level?timeDifference=9.0");
+
+/** ユーザーの基本情報を取得 */
+export const getUserBasicInfo = (token: string) =>
+  axios(token).get<UserBasicResponse>("/user/basic");
 
 /** ユーザー登録 */
 export const createUser = (req: CreateUserRequest, token: string) =>
