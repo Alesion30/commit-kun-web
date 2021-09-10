@@ -6,9 +6,9 @@ import { VFC } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import appConfig from "~/config/app";
-import { LockClosedIcon } from "@heroicons/react/solid";
 import fontTitle from "~/assets/img/font.png";
 import fontSubTitle from "~/assets/img/font-sub.png";
+import GitHubIcon from "~/assets/img/github-brands.svg";
 
 export type SigninLayoutProps = {
   onClickGithubSignin: () => void;
@@ -35,15 +35,14 @@ export const SigninLayout: VFC<SigninLayoutProps> = ({
           <button
             type="button"
             onClick={onClickGithubSignin}
-            className="group relative w-96 flex justify-center py-4 px-8 border border-transparent text-xl font-bold rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            className="group md:w-96 w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-md bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
           >
-            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon
-                className="h-5 w-5 text-gray-500 group-hover:text-gray-400"
-                aria-hidden="true"
-              />
+            <div className="mr-5">
+              <GitHubIcon className="h-10 w-10 text-gray-500 group-hover:text-gray-400" />
+            </div>
+            <span className="text-xl font-bold text-white">
+              GitHubアカウントで始める
             </span>
-            GitHubアカウントで始める
           </button>
         </div>
       </main>
