@@ -1,13 +1,16 @@
 import { createContext } from "react";
-import { User } from "~/plugins/firebase";
+
+export type AuthUser = {
+  uid: string;
+  userName: string;
+  photoURL: string;
+};
 
 export type AuthContextProps = {
   isAuthenticated: boolean;
-  authUser: User;
+  authUser: AuthUser;
   isLoading: boolean;
   fbIdToken: string;
-  githubToken: String;
-  setGithubToken: React.Dispatch<React.SetStateAction<String>>;
 };
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -15,6 +18,4 @@ export const AuthContext = createContext<AuthContextProps>({
   authUser: null,
   isLoading: true,
   fbIdToken: null,
-  githubToken: null,
-  setGithubToken: () => {},
 });

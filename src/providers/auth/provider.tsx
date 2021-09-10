@@ -1,8 +1,7 @@
 import { ReactNode, VFC, useEffect, useState } from "react";
-import { getGitHubToken, removeGitHubToken } from "~/data/cookie";
-import { fetchGitHubInfo } from "~/data/remote/user";
-import { User, onAuthStateChanged } from "~/plugins/firebase";
-import { AuthContext } from "./context";
+import { fetchGitHubInfo, getUser } from "~/data/remote/user";
+import { onAuthStateChanged } from "~/plugins/firebase";
+import { AuthContext, AuthUser } from "./context";
 
 type AuthProviderProps = {
   children: ReactNode;
@@ -11,9 +10,8 @@ type AuthProviderProps = {
 export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [authUser, setAuthUser] = useState<User>(null);
+  const [authUser, setAuthUser] = useState<AuthUser>(null);
   const [fbIdToken, setFbIdToken] = useState<string>(null);
-  const [githubToken, setGithubToken] = useState<String>(null);
 
   useEffect(() => {
     const initializeAuth = async (): Promise<void> => {
@@ -21,17 +19,18 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
       setLoading(true);
 
       onAuthStateChanged(async (user) => {
-        // 認証情報をセット
-        setAuthUser(user);
-
         if (user != null) {
           // IDトークンをセット
           const idToken = await user.getIdToken();
           setFbIdToken(idToken);
 
-          // GitHubAPIのトークンをCookieから取得
-          const token = getGitHubToken();
-          setGithubToken(token);
+          // バックエンド ユーザー情報
+          const backendUser = (await getUser(idToken)).data;
+          setAuthUser({
+            uid: user.uid,
+            userName: backendUser.userName,
+            photoURL: user.photoURL,
+          });
 
           // GitHubの情報をDBに反映
           fetchGitHubInfo(idToken);
@@ -39,7 +38,6 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
           setAuthenticated(true);
         } else {
           setAuthenticated(false);
-          removeGitHubToken();
         }
 
         // ロードを終了
@@ -56,8 +54,6 @@ export const AuthProvider: VFC<AuthProviderProps> = ({ children }) => {
         authUser,
         isLoading,
         fbIdToken,
-        githubToken,
-        setGithubToken,
       }}
     >
       {children}

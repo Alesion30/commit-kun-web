@@ -4,28 +4,22 @@
 
 import { NextPage } from "next";
 import { SigninLayout } from "~/components/templates/signin";
-import { setGitHubToken } from "~/data/cookie";
 import { createUser, getUser, updateUser } from "~/data/remote/user";
 import { withoutAuth } from "~/hocs";
-import { useAuth } from "~/hooks";
 import { signInGithub, credentialFromResultGitHub } from "~/plugins/firebase";
 import { Octokit } from "octokit";
 
 const Signin: NextPage = () => {
-  const auth = useAuth();
-
   const onClickGithubSignin = () => {
     signInGithub()
       .then(async (result) => {
         // GitHubAPIのトークンをセット
         const credential = credentialFromResultGitHub(result);
-        const token = credential.accessToken;
-        auth.setGithubToken(token);
-        setGitHubToken(token);
+        const githubToken = credential.accessToken;
 
         try {
           // GitHub ユーザー情報
-          const octokit = new Octokit({ auth: token });
+          const octokit = new Octokit({ auth: githubToken });
           const githubUser = (await octokit.rest.users.getAuthenticated()).data;
 
           // Firebase ユーザー情報
@@ -42,7 +36,7 @@ const Signin: NextPage = () => {
                 userName: githubUser.login,
                 email: user.email,
                 imageUrl: user.photoURL,
-                accessToken: token,
+                accessToken: githubToken,
               },
               idToken
             );
@@ -53,7 +47,7 @@ const Signin: NextPage = () => {
                 userName: githubUser.login,
                 email: user.email,
                 imageUrl: user.photoURL,
-                accessToken: token,
+                accessToken: githubToken,
               },
               idToken
             );
