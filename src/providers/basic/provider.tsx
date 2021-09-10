@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useState, VFC } from "react";
+import { ReactNode, useCallback, useState, VFC } from "react";
 import { getUserBasicInfo, UserBasicResponse } from "~/data/remote/user";
 import { useAuth } from "~/hooks";
 import { BasicContext } from "./context";
