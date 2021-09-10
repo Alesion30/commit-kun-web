@@ -10,6 +10,7 @@ import { Ranking } from "~/components/organisms/ranking";
 import { StatusCard } from "~/components/organisms/status_card";
 import { useRouter } from "next/router";
 import useBasic from "~/hooks/basic";
+import { round } from "~/utils";
 
 const Home: NextPage = () => {
   // アクティビティ画面に遷移
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
                 <StatusCard
                   title="作業時間"
                   label="TOTAL"
-                  value={basicInfo.workTime}
+                  value={round(basicInfo.workTime)}
                   unit="hour"
                   color="bg-blue-400"
                   onClick={onClickActivityPage}

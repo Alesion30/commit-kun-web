@@ -16,6 +16,7 @@ import {
 import useActivity from "~/hooks/activity";
 import dayjs from "~/plugins/dayjs";
 import useLoading from "~/hooks/loading";
+import { round } from "~/utils";
 
 const Activity: NextPage = () => {
   // ローディング
@@ -118,8 +119,8 @@ const Activity: NextPage = () => {
             <StatusCard
               title="作業時間"
               label={dateStr}
-              value={activityLog?.workTime?.todayData}
-              preValue={activityLog?.workTime?.yesterdayData}
+              value={round(activityLog?.workTime?.todayData)}
+              preValue={round(activityLog?.workTime?.yesterdayData)}
               unit="hour"
               color="bg-blue-400"
               onClick={() => {
