@@ -24,8 +24,8 @@ export const Ranking: VFC<RankingProps> = ({ rankings }) => {
           </thead>
           <tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full">
             {rankings.map((item, index) => (
-              <tr className="flex w-full mb-4" key={`ranking_${index}`}>
-                <td className="text-center p-4 w-1/6">{index + 1}</td>
+              <tr className="flex w-full mb-2" key={`ranking_${index}`}>
+                <td className="text-center p-4 w-1/6">{index + 1}位</td>
                 <td className="text-center p-4 w-3/6">
                   {item.user?.userName ?? ""}
                 </td>
