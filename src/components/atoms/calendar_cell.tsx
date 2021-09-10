@@ -53,7 +53,7 @@ export const CalendarCell: VFC<CalendarCellProps> = ({
           ? "cursor-pointer hover:bg-blue-100 transition ease-in-out duration-500"
           : "cursor-default",
         disabled ? "bg-gray-100" : "",
-        bgColor && !disabled ? bgColor : "",
+        bgColor && !disabled ? `${bgColor}` : "",
         top ? "border-t" : "",
         right ? "border-r" : "",
         bottom ? "border-b" : "",

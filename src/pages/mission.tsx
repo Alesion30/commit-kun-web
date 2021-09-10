@@ -5,6 +5,7 @@
 import { NextPage } from "next";
 import { useState, useEffect } from "react";
 import { MainLayout } from "~/components/templates/main";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 import { withAuth } from "~/hocs";
 import { SimpleCard } from "~/components/organisms/card";
 import { MissionCard } from "~/components/organisms/mission_card";
@@ -40,10 +41,14 @@ const Mission: NextPage = () => {
     run();
   }, [activeIndex, mission.daily, mission.normal]);
 
+  const onClickNextPage = () => {
+    mission.nextNormalMissionPage();
+  };
+
   return (
     <MainLayout>
       <div className="flex justify-center">
-        <div className="mt-5 xl:w-4/5 w-full px-2">
+        <div className="mt-5 mb-10 xl:w-4/5 w-full px-2">
           <Tabs
             tabs={TABS}
             activeIndex={activeIndex}
@@ -67,6 +72,21 @@ const Mission: NextPage = () => {
                   );
                 })}
               </div>
+              {activeIndex === 1 && (
+                <button
+                  type="button"
+                  onClick={onClickNextPage}
+                  className="mb-5 group relative w-96 flex justify-center py-4 px-5 border border-transparent text-xl font-bold rounded-2xl text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                >
+                  <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <ChevronDownIcon
+                      className="h-10 w-10 text-gray-400 group-hover:text-gray-200"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  もっと見る
+                </button>
+              )}
             </div>
           </SimpleCard>
         </div>

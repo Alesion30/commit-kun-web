@@ -15,6 +15,15 @@ export const MissionProvider: VFC<MissionProviderProps> = ({ children }) => {
   const auth = useAuth();
   const token = auth.fbIdToken;
 
+  const [normalMissionPage, setNormalMissionPage] = useState<number>(1);
+  const nextNormalMissionPage = async () => {
+    setNormalMissionPage(normalMissionPage + 1);
+    const newNormalMissions = (await getNormalMission(token, normalMissionPage))
+      .data;
+    const concatNormalMissions = normalMissions.concat(newNormalMissions);
+    setNormalMissions(concatNormalMissions);
+  };
+
   const [dailyMissions, setDailyMissions] = useState<MissionResponse>([]);
   const [normalMissions, setNormalMissions] = useState<MissionResponse>([]);
 
@@ -26,7 +35,7 @@ export const MissionProvider: VFC<MissionProviderProps> = ({ children }) => {
         setDailyMissions(dailyMissions);
 
         // ノーマルミッション取得
-        const normalMissions = (await getNormalMission(token)).data;
+        const normalMissions = (await getNormalMission(token, 1)).data;
         setNormalMissions(normalMissions);
       }
     };
@@ -38,6 +47,7 @@ export const MissionProvider: VFC<MissionProviderProps> = ({ children }) => {
       value={{
         daily: dailyMissions,
         normal: normalMissions,
+        nextNormalMissionPage: nextNormalMissionPage,
       }}
     >
       {children}

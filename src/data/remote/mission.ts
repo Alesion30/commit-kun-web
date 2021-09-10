@@ -14,5 +14,10 @@ export const getDailyMission = (token: string) =>
   axios(token).get<MissionResponse>("/user/mission/daily");
 
 /** ノーマルミッションを取得 */
-export const getNormalMission = (token: string) =>
-  axios(token).get<MissionResponse>("/user/mission/normal");
+export const getNormalMission = (token: string, page: number) =>
+  axios(token).get<MissionResponse>("/user/mission/normal", {
+    params: {
+      page: page,
+      pageSize: 5,
+    },
+  });
