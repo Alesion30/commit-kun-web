@@ -59,7 +59,7 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
             {truncateChar(authUser?.userName ?? "")}
           </p>
           <p className="sm:text-3xl text-2xl mb-7">
-            順位:{" "}
+            順位:&nbsp;
             <span
               className={classNames(
                 "rounded-lg p-3",
