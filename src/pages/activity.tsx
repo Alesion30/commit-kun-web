@@ -115,7 +115,7 @@ const Activity: NextPage = () => {
           </div>
         </div>
         <div className="flex flex-wrap justify-center mb-10">
-          <div className="m-2 2xl:flex-1 flex-auto">
+          <div className="m-2 flex-auto">
             <StatusCard
               title="作業時間"
               label={dateStr}
@@ -136,7 +136,7 @@ const Activity: NextPage = () => {
               }}
             />
           </div>
-          <div className="m-2 2xl:flex-1 flex-auto">
+          <div className="m-2 flex-auto">
             <StatusCard
               title="コミット数"
               label={dateStr}
@@ -156,7 +156,7 @@ const Activity: NextPage = () => {
               }}
             />
           </div>
-          <div className="m-2 2xl:flex-1 flex-auto">
+          <div className="m-2 flex-auto">
             <StatusCard
               title="変更コード量"
               label={dateStr}
@@ -177,7 +177,7 @@ const Activity: NextPage = () => {
               }}
             />
           </div>
-          <div className="m-2 2xl:flex-1 flex-auto">
+          <div className="m-2 flex-auto">
             <StatusCard
               title="PRレビュー数"
               label={dateStr}
