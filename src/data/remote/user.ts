@@ -26,6 +26,7 @@ export type UserBasicResponse = {
   typeNum: number;
   commit: number;
   prComment: number;
+  prevExp: number; // 前のレベルに必要な経験値
   nextExp: number; // 次のレベルに必要な経験値
 };
 

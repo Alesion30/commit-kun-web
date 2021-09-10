@@ -8,25 +8,29 @@ type UserProfileCardProps = {
   rank: number;
   level: number;
   experience: number;
-  nextLevelExperience: number;
+  prevLevelExp: number;
+  nextLevelExp: number;
 };
 
 export const UserProfileCard: VFC<UserProfileCardProps> = ({
   rank,
   level,
   experience,
-  nextLevelExperience,
+  prevLevelExp,
+  nextLevelExp,
 }) => {
   const { authUser } = useAuth();
 
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    if (nextLevelExperience > 0 && experience > 0) {
-      setProgress((experience / nextLevelExperience) * 100);
+    const diffExp = nextLevelExp - prevLevelExp;
+    const diffCurrentExp = experience - prevLevelExp;
+    if (diffExp > 0 && experience - prevLevelExp > 0) {
+      setProgress((diffCurrentExp / diffExp) * 100);
     } else {
       setProgress(0);
     }
-  }, [experience, nextLevelExperience]);
+  }, [experience, nextLevelExp, prevLevelExp]);
 
   // 順位 色
   let bgColor = "bg-gray-200";

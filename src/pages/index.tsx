@@ -53,7 +53,8 @@ const Home: NextPage = () => {
               rank={basicInfo?.rank ?? 0}
               level={basicInfo?.level ?? 0}
               experience={basicInfo?.experiencePoint ?? 0}
-              nextLevelExperience={basicInfo?.nextExp ?? 0}
+              prevLevelExp={basicInfo?.prevExp ?? 0}
+              nextLevelExp={basicInfo?.nextExp ?? 0}
             />
             <div className="flex my-5">
               <div className="flex-auto mx-2">
