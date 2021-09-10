@@ -28,8 +28,8 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
     setProgress((prog / LEVEL_STEP) * 100);
   }, [experience, level]);
 
-  // ランク 色
-  let bgColor;
+  // 順位 色
+  let bgColor = "bg-gray-200";
   let isFontWeight = false;
   switch (rank) {
     case 1:
@@ -40,10 +40,10 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
       bgColor = "bg-silver";
       isFontWeight = true;
       break;
-    case 3:
-      bgColor = "bg-bronze";
-      isFontWeight = true;
-      break;
+    // case 3:
+    //   bgColor = "bg-bronze";
+    //   isFontWeight = true;
+    //   break;
   }
 
   return (
@@ -58,8 +58,8 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
           <p className="sm:text-5xl text-4xl font-semibold mb-7">
             {authUser?.userName ?? ""}
           </p>
-          <p className="sm:text-3xl text-2xl mb-5">
-            ランク:{" "}
+          <p className="sm:text-3xl text-2xl mb-7">
+            順位:{" "}
             <span
               className={classNames(
                 "rounded-lg p-3",
@@ -70,8 +70,8 @@ export const UserProfileCard: VFC<UserProfileCardProps> = ({
               {rank}位
             </span>
           </p>
-          <p className="sm:text-3xl text-2xl mb-5">レベル: Lv.{level}</p>
-          <p className="sm:text-3xl text-2xl">経験値: {experience}Exp</p>
+          {/* <p className="sm:text-3xl text-2xl mb-3">レベル: {level}</p>
+          <p className="sm:text-3xl text-2xl">経験値: {experience}Exp</p> */}
         </div>
       </div>
     </SimpleCard>

@@ -17,7 +17,7 @@ export const Ranking: VFC<RankingProps> = ({ rankings }) => {
         <table className="text-left w-full">
           <thead className="bg-gray-400 flex text-white w-full">
             <tr className="flex w-full">
-              <th className="text-center p-4 w-1/6">ランク</th>
+              <th className="text-center p-4 w-1/6">順位</th>
               <th className="text-center p-4 w-3/6">ユーザー名</th>
               <th className="text-center p-4 w-2/6">レベル</th>
               <th className="text-center p-4 w-2/6">経験値</th>
