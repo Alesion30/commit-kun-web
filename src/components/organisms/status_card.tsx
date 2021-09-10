@@ -13,6 +13,8 @@ type StatusCardProps = {
   unit?: string;
   /** tailwindの色を指定(eg. red-400) */
   color?: string;
+  /** 文字色 黒 */
+  isBlack?: boolean;
 };
 
 /**
@@ -28,6 +30,7 @@ export const StatusCard: VFC<StatusCardProps> = ({
   label,
   unit,
   color,
+  isBlack,
 }) => {
   const bgColorClassName = color ?? "bg-red-400";
   const [opacity, setOpacity] = useState<number>(0);
@@ -62,7 +65,14 @@ export const StatusCard: VFC<StatusCardProps> = ({
               <span>&nbsp;-&gt;&nbsp;</span>
             </span>
           )}
-          <span className="text-5xl text-red-500">{value ?? "-"}</span>
+          <span
+            className={classNames(
+              "text-5xl",
+              isBlack !== true ? "text-red-500" : ""
+            )}
+          >
+            {value ?? "-"}
+          </span>
           {unit && <span className="text-3xl">{unit}</span>}
         </p>
       )}

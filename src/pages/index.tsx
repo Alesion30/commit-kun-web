@@ -39,6 +39,7 @@ const Home: NextPage = () => {
                   unit="hour"
                   color="bg-blue-400"
                   onClick={onClickActivityPage}
+                  isBlack
                 />
               </div>
               <div className="flex-auto mx-2">
@@ -48,6 +49,7 @@ const Home: NextPage = () => {
                   value={basicInfo.commit}
                   color="bg-red-400"
                   onClick={onClickActivityPage}
+                  isBlack
                 />
               </div>
             </div>
@@ -60,6 +62,7 @@ const Home: NextPage = () => {
                   unit="words"
                   color="bg-green-400"
                   onClick={onClickActivityPage}
+                  isBlack
                 />
               </div>
               <div className="flex-auto mx-2">
@@ -69,6 +72,7 @@ const Home: NextPage = () => {
                   value={basicInfo.prComment}
                   color="bg-yellow-400"
                   onClick={onClickActivityPage}
+                  isBlack
                 />
               </div>
             </div>
