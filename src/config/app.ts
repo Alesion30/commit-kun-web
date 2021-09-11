@@ -1,4 +1,4 @@
-interface App {
+type App = {
   title: string;
   description: string;
   url: string;
@@ -6,7 +6,7 @@ interface App {
   image: string;
   type: string;
   themeColor: string;
-}
+};
 
 const appConfig: App = {
   title: "積み重ねが楽しくなる | コミットくん",
