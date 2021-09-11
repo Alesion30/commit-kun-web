@@ -9,7 +9,7 @@ type App = {
 };
 
 const appConfig: App = {
-  title: "積み重ねが楽しくなる | コミットくん",
+  title: "積み重ねが楽しくなるプログラマーのためのアプリ | コミットくん",
   description:
     "コミットくんは、Visual Studio Code・GitHubと連携して、さまざまな指標（コードを書いている時間・コミット数 etc..）から経験値を算出し、プログラマーとしてのがんばりを可視化してくれるサービスです。※本サービスでは、GitHubアカウントが必要になります。",
   url: "https://commit-kun-web.vercel.app",
