@@ -48,7 +48,7 @@ const Mission: NextPage = () => {
   return (
     <MainLayout>
       <div className="flex justify-center">
-        <div className="mt-5 mb-10 xl:w-4/5 w-full px-2">
+        <div className="container 2xl:w-10/12 w-full mt-5 mb-10 px-2">
           <Tabs
             tabs={TABS}
             activeIndex={activeIndex}

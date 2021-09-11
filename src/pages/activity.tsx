@@ -92,7 +92,7 @@ const Activity: NextPage = () => {
         </div>
       </TailwindUIModal>
 
-      <div className="container xl:w-4/5 w-full mx-auto sm:pt-4 sm:pb-20 px-2 pt-2 pb-10 text-center">
+      <div className="container 2xl:w-10/12 w-full mx-auto sm:pt-4 sm:pb-20 px-2 pt-2 pb-10 text-center">
         <div className="flex flex-wrap justify-center mb-2">
           <div className="m-2 xl:flex-1 flex-auto">
             <StatusCard
