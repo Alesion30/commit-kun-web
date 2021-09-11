@@ -35,6 +35,9 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
   const router = useRouter();
   const pathname = router.pathname;
 
+  // ホーム画面に戻る
+  const onClickHome = () => router.push("/");
+
   // snackbar
   const [openSnackbar] = useSnackbar();
 
@@ -50,13 +53,10 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
     { name: "ホーム", href: "/" },
     { name: "ミッション", href: "/mission" },
     { name: "アクティビティ", href: "/activity" },
-    // { name: "フレンド", href: "/friend" },
   ];
 
   // プロフィール ドロップダウン
   const profileNavigations: ProfileDropdownNavigation[] = [
-    // { name: "Your Profile", href: "" },
-    // { name: "Settings", href: "" },
     { name: "ユーザーIDをコピー", onClick: onClickUserIdCopy },
     { name: "ログアウト", onClick: onClickSignOut },
   ];
@@ -81,13 +81,18 @@ export const TailwindUIHeader: VFC<TailwindUIHeaderProps> = ({
                 <div className="flex-shrink-0 flex items-center">
                   <div className="lg:hidden p-0 m-0" style={{ height: 38 }}>
                     <Image
+                      onClick={onClickHome}
                       width={38}
                       height={38}
                       src={CommitKunIcon}
-                      alt="Workflow"
+                      alt=""
+                      className="cursor-pointer"
                     />
                   </div>
-                  <CommitKunLogo className="hidden lg:block h-8 w-auto" />
+                  <CommitKunLogo
+                    onClick={onClickHome}
+                    className="hidden lg:block h-8 w-auto cursor-pointer"
+                  />
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
